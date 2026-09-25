@@ -34,16 +34,11 @@ def embedding_text(title: str, chunk: ChunkData) -> str:
     return f"{header}\n{chunk.content}"
 
 
-def ingest_law(session: Session, law: dict) -> int:
-    title = law["LawName"]
-    chunks = chunk_law(law)
-    # Embed before touching the database, so a failure here leaves the old data intact.
-    vectors = embed_documents([embedding_text(title, c) for c in chunks])
-
-    session.execute(delete(Document).where(Document.title == title))
+def store_law(session: Session, law: dict, chunks: list[ChunkData], vectors: list[list[float]]) -> None:
+    session.execute(delete(Document).where(Document.title == law["LawName"]))
     session.add(
         Document(
-            title=title,
+            title=law["LawName"],
             category=law["LawCategory"],
             source_url=law["LawURL"],
             modified_date=parse_date(law["LawModifiedDate"]),
@@ -59,7 +54,6 @@ def ingest_law(session: Session, law: dict) -> int:
             ],
         )
     )
-    return len(chunks)
 
 
 def main() -> None:
@@ -70,19 +64,26 @@ def main() -> None:
         raise SystemExit(f"no JSON files in {RAW_DIR}; run scripts/fetch_laws.py first")
 
     started = time.perf_counter()
-    total = 0
-    for path in paths:
-        law = json.loads(path.read_text(encoding="utf-8"))
+    chunked = [(law, chunk_law(law)) for law in (json.loads(p.read_text(encoding="utf-8")) for p in paths)]
+
+    # One encode call for all chunks: the model sorts by length internally, so batching
+    # across laws wastes much less padding than one call per law (measured 37s vs 72s).
+    texts = [embedding_text(law["LawName"], c) for law, chunks in chunked for c in chunks]
+    vectors = embed_documents(texts)
+    logger.info("embedded %d chunks in %.1fs", len(texts), time.perf_counter() - started)
+
+    offset = 0
+    for law, chunks in chunked:
         with SessionLocal.begin() as session:
-            count = ingest_law(session, law)
-        total += count
-        logger.info("%s: %d chunks", law["LawName"], count)
+            store_law(session, law, chunks, vectors[offset : offset + len(chunks)])
+        offset += len(chunks)
+        logger.info("%s: %d chunks", law["LawName"], len(chunks))
 
     with SessionLocal() as session:
         stored = session.scalar(select(func.count()).select_from(Chunk))
     logger.info(
         "done: %d laws, %d chunks in %.1fs (database holds %d chunks)",
-        len(paths), total, time.perf_counter() - started, stored,
+        len(paths), len(texts), time.perf_counter() - started, stored,
     )
 
 
