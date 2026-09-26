@@ -10,6 +10,8 @@ from app.auth import decode_access_token
 from app.models import User
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/login")
+
 
 def get_db() -> Iterator[Session]:
     with SessionLocal() as session:
