@@ -12,7 +12,9 @@ class Settings(BaseSettings):
 
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.5-flash"
-
+    groq_model: str = "openai/gpt-oss-120b"
+    groq_api_key: str = ""
+    llm_provider: str = "groq"
     embedding_model: str = "BAAI/bge-m3"
     embedding_dim: int = 1024
 
