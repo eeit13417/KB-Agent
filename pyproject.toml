@@ -12,7 +12,6 @@ dependencies = [
     "psycopg[binary]>=3.2",
     "pgvector>=0.3",
     "python-jose[cryptography]>=3.3",
-    "passlib[bcrypt]>=1.7",
     "python-multipart>=0.0.12",
     "google-genai>=0.3",
     "sentence-transformers>=3.3",
@@ -21,6 +20,8 @@ dependencies = [
     "streamlit>=1.40",
     "requests>=2.32",
     "groq>=1.7.0",
+    "email-validator>=2.3.0",
+    "bcrypt>=5.0.0",
 ]
 
 [dependency-groups]

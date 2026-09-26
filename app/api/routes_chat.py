@@ -4,8 +4,8 @@ from collections.abc import Iterator
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
-
-from app.api.deps import get_db
+from app.models import User
+from app.api.deps import get_db, get_current_user
 from app.rag.generator import stream_answer
 from app.rag.retriever import search
 from app.schemas import Citation, ChatRequest
@@ -19,7 +19,7 @@ def sse(payload: dict) -> str:
 
 
 @router.post("/chat")
-def chat(request: ChatRequest, session: Session = Depends(get_db)) -> StreamingResponse:
+def chat(request: ChatRequest, session: Session = Depends(get_db), user: User = Depends(get_current_user)) -> StreamingResponse:
     # Retrieve before streaming starts, so the database session is done being used
     # by the time the response body begins.
     chunks = search(session, request.question)
