@@ -1,4 +1,22 @@
 services:
+  app:
+    build: .
+    container_name: kb-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://kbagent:kbagent@postgres:5432/kbagent
+      REDIS_URL: redis://redis:6379/0
+      LLM_PROVIDER: groq
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      GROQ_MODEL: ${GROQ_MODEL}
+      JWT_SECRET: ${JWT_SECRET}
+    ports: 
+      - "8000:8000"
+
   postgres:
     image: pgvector/pgvector:pg16
     container_name: kb-postgres
