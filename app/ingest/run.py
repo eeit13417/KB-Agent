@@ -1,6 +1,6 @@
-"""Load law JSON files, chunk and embed them, and store them in Postgres.
+"""Load laws and PDF publications, chunk and embed them, and store them in Postgres.
 
-Safe to re-run: each law is deleted and re-inserted in one transaction.
+Safe to re-run: each document is deleted and re-inserted in one transaction.
 """
 
 import json
@@ -8,13 +8,13 @@ import logging
 import pathlib
 import time
 from datetime import date, datetime
-
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
 from app.db import SessionLocal
 from app.ingest.chunker import ChunkData, chunk_law
 from app.ingest.embedder import embed_documents
+from app.ingest.pdf_loader import PDF_DIR, chunk_pdf, load_manifest
 from app.models import Chunk, Document
 
 RAW_DIR = pathlib.Path("data/raw")
@@ -59,12 +59,31 @@ def store_law(session: Session, law: dict, chunks: list[ChunkData], vectors: lis
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
-    paths = sorted(RAW_DIR.glob("*.json"))
-    if not paths:
+    law_paths = sorted(RAW_DIR.glob("*.json"))
+    if not law_paths:
         raise SystemExit(f"no JSON files in {RAW_DIR}; run scripts/fetch_laws.py first")
 
     started = time.perf_counter()
-    chunked = [(law, chunk_law(law)) for law in (json.loads(p.read_text(encoding="utf-8")) for p in paths)]
+    chunked: list[tuple[dict, list[ChunkData]]] = []
+
+    for path in law_paths:
+        law = json.loads(path.read_text(encoding="utf-8"))
+        chunked.append((law, chunk_law(law)))
+
+    # PDFs reuse the law field names so store_law and embedding_text work unchanged:
+    # a publication is just another source, not another pipeline.
+    manifest = load_manifest()
+    for path in sorted(PDF_DIR.glob("*.pdf")):
+        entry = manifest.get(path.name, {})
+        document = {
+            "LawName": entry.get("title") or path.stem,
+            "LawCategory": f"職安署出版品＞{entry.get('section', '未分類')}",
+            "LawURL": entry.get("source_url", ""),
+            "LawModifiedDate": "",
+        }
+        chunks = chunk_pdf(path)
+        if chunks:
+            chunked.append((document, chunks))
 
     # One encode call for all chunks: the model sorts by length internally, so batching
     # across laws wastes much less padding than one call per law (measured 37s vs 72s).
@@ -82,8 +101,8 @@ def main() -> None:
     with SessionLocal() as session:
         stored = session.scalar(select(func.count()).select_from(Chunk))
     logger.info(
-        "done: %d laws, %d chunks in %.1fs (database holds %d chunks)",
-        len(paths), len(texts), time.perf_counter() - started, stored,
+        "done: %d documents, %d chunks in %.1fs (database holds %d chunks)",
+        len(chunked), len(texts), time.perf_counter() - started, stored,
     )
 
 

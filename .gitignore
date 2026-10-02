@@ -6,3 +6,7 @@ data/raw/*
 !data/raw/.gitkeep
 .pytest_cache/
 models/
+data/pdf/*
+!data/pdf/manifest.json
+!data/pdf/inspection.json
+!data/pdf/ocr/
