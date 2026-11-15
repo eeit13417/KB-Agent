@@ -19,6 +19,9 @@ SECTIONS = {
     "宣導手冊": "https://www.osha.gov.tw/48110/48461/48517/48539/48547/",
     "宣導其他": "https://www.osha.gov.tw/48110/48461/48517/48539/48549/",
     "訓練教材": "https://www.osha.gov.tw/48110/48461/48517/48539/48551/",
+    "ILOSH 檔案下載": "https://www.ilosh.gov.tw/90734/90879/90947/",
+    "ILOSH 出版中心": "https://www.ilosh.gov.tw/90959/90973/",
+    "ILOSH 研究季刊": "https://www.ilosh.gov.tw/90734/90789/90795/92349/",
 }
 OUT = pathlib.Path("data/pdf")
 MANIFEST = OUT / "manifest.json"
