@@ -63,7 +63,7 @@ input:focus {
   margin: 0;
 }
 
-/* 登入頁 */
+/* Login page */
 .login-page {
   min-height: 100vh;
   display: grid;
@@ -96,7 +96,7 @@ input:focus {
   background: #f3f4f6;
 }
 
-/* 主畫面 */
+/* Main layout */
 .app {
   height: 100vh;
   display: flex;
@@ -171,7 +171,7 @@ input:focus {
 
 }
 
-/* Markdown 內容 */
+/* Markdown content */
 .bubble.assistant :first-child {
   margin-top: 0;
 }
@@ -246,7 +246,7 @@ input:focus {
   flex: 1;
 }
 
-/* 來源面板 */
+/* Sources panel */
 .sources {
   background: var(--panel);
   border-left: 1px solid var(--border);
