@@ -1,17 +1,8 @@
-"""Split a law (from the MOJ law API JSON) into article-level chunks for embedding.
-
-Each article becomes one chunk, tagged with its chapter path and article number
-so answers can cite e.g. "勞動基準法 第 38 條".
-"""
+"""Shared chunk types, and the paragraph-preserving splitter every source uses."""
 
 import re
 from dataclasses import dataclass
-
-from app.config import settings
-
-HEADING_LEVELS = {"章": 0, "節": 1, "款": 2}
-HEADING_RE = re.compile(r"第\s*\S+?\s*([章節款])")
-DELETED_MARKERS = {"（刪除）", "(刪除)"}
+from datetime import date
 
 
 @dataclass(frozen=True)
@@ -22,11 +13,19 @@ class ChunkData:
     content: str
 
 
-def normalize(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip()
+@dataclass(frozen=True)
+class SourceDocument:
+    """One document from any source, ready to embed and store."""
+
+    title: str
+    category: str
+    source_url: str
+    modified_date: date | None
+    chunks: list[ChunkData]
 
 
 def split_article(content: str, max_chars: int) -> list[str]:
+    """Split on line breaks only, repeating the first line (the heading) in every piece."""
     lines = [line.strip() for line in re.split(r"\r?\n", content) if line.strip()]
     whole = "\n".join(lines)
     if len(whole) <= max_chars:
@@ -42,27 +41,3 @@ def split_article(content: str, max_chars: int) -> list[str]:
         current.append(line)
     parts.append("\n".join(current))
     return parts
-
-
-def chunk_law(law: dict, max_chars: int = settings.chunk_size) -> list[ChunkData]:
-    headings: list[str] = []
-    chunks: list[ChunkData] = []
-
-    for article in law["LawArticles"]:
-        text = article["ArticleContent"]
-
-        if article["ArticleType"] == "C":
-            heading = normalize(text)
-            match = HEADING_RE.match(heading)
-            level = HEADING_LEVELS[match.group(1)] if match else 0
-            headings = headings[:level] + [heading]
-            continue
-
-        if text.strip() in DELETED_MARKERS:
-            continue
-
-        chapter = " / ".join(headings) or None
-        for part in split_article(text, max_chars):
-            chunks.append(ChunkData(len(chunks), chapter, normalize(article["ArticleNo"]), part))
-
-    return chunks

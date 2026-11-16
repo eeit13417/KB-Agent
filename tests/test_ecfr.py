@@ -30,11 +30,12 @@ def test_part_number_and_name():
 def test_heading_path_and_reserved_sections():
     chapters = {no: c.chapter for no, c in by_section().items()}
     assert chapters == {
-        "\u00a7 999.0": None,
-        "\u00a7 999.1": "Subpart A\u2014General / Waiting Time",
-        "\u00a7 999.3": "Subpart A\u2014General",
-        "Appendix A to Part 999": None,
+        "\u00a7 999.0": "Hours Worked under the Act",
+        "\u00a7 999.1": "Hours Worked under the Act / Subpart A\u2014General / Waiting Time",
+        "\u00a7 999.3": "Hours Worked under the Act / Subpart A\u2014General",
+        "Appendix A to Part 999": "Hours Worked under the Act",
     }
+
 
 
 def test_source_notes_dropped_and_inline_text_kept():

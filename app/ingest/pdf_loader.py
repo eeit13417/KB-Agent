@@ -52,7 +52,7 @@ def chunk_pdf(path: pathlib.Path) -> list[ChunkData]:
                 ChunkData(
                     chunk_index=len(chunks),
                     chapter=None,
-                    article_no=f"第 {number} 頁",
+                    article_no=f"p. {number}",
                     content=part,
                 )
             )

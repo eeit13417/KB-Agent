@@ -73,7 +73,8 @@ def chunk_part(xml: bytes, max_chars: int = settings.chunk_size) -> CfrPart:
     name = title_case(heading(root).partition("\u2014")[2])
 
     chunks: list[ChunkData] = []
-    for chapter, section in walk(root, []):
+    # The part name heads every path, so it reaches the embedding and the citation panel.
+    for chapter, section in walk(root, [name]):
         head = heading(section)
         lines = [line for child in section for line in block_lines(child)]
         if "[Reserved]" in head or not lines:

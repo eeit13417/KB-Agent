@@ -43,7 +43,7 @@ class Chunk(Base):
         ForeignKey("documents.id", ondelete="CASCADE"), index=True
     )
     chunk_index: Mapped[int]
-    chapter: Mapped[str | None] = mapped_column(String(200))
+    chapter: Mapped[str | None] = mapped_column(String(500))
     article_no: Mapped[str | None] = mapped_column(String(50))
     content: Mapped[str] = mapped_column(Text)
     embedding: Mapped[list[float]] = mapped_column(Vector(settings.embedding_dim))
