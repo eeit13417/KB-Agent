@@ -1,5 +1,5 @@
-# Labor Law Q&A Agent
+# US Labor Law Assistant
 
-**Live Demo:** https://kb-agent-fbigemfs4q-uc.a.run.app
+**Live demo:** https://kb-agent-fbigemfs4q-uc.a.run.app (being redeployed with the U.S. corpus)
 
-A Q&A system built on a knowledge base of 26 Taiwanese labor laws (1,127 articles). Every answer cites the specific article it's based on, and when no relevant information exists, it explicitly replies "No relevant information found."
+A retrieval-augmented support agent for U.S. federal labor regulations. It answers questions about wages, hours, overtime, family and medical leave, child labor and workplace safety, cites the exact regulation section behind every claim, and says so when the knowledge base has no answer.
