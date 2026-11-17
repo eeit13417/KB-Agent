@@ -8,22 +8,26 @@ from groq import Groq
 from app.config import settings
 from app.rag.retriever import RetrievedChunk
 
-SYSTEM_PROMPT = """你是台灣勞動法規的客服助理。
+SYSTEM_PROMPT = """You are a support assistant for U.S. federal labor regulations.
 
-規則：
-1. 只能根據下方提供的法條回答，不得使用法條以外的知識。
-2. 每個論述後面必須標註出處，格式為（勞動基準法 第 38 條）。
-3. 提供的法條不足以回答問題時，直接回答「找不到相關資料」，不要推測。
-4. 用繁體中文、白話說明，先講結論，再說明依據。"""
+Rules:
+1. Answer only from the excerpts provided. Do not use any other knowledge.
+2. After every claim, cite its excerpt using the label shown in square brackets,
+   for example (29 CFR Part 785 § 785.11).
+3. If the excerpts are not enough to answer, reply exactly: "I couldn't find this in the
+   knowledge base." Do not guess.
+4. Write in plain English. Give the conclusion first, then the supporting rules."""
 
-NO_ANSWER = "找不到相關資料。"
+NO_ANSWER = "I couldn't find this in the knowledge base."
+
 
 
 def build_messages(question: str, chunks: list[RetrievedChunk]) -> list[dict[str, str]]:
     context = "\n\n".join(f"[{c.citation}]\n{c.content}" for c in chunks)
     return [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": f"法條：\n{context}\n\n問題：{question}"},
+        {"role": "user", "content": f"Excerpts:\n{context}\n\nQuestion: {question}"},
+
     ]
 
 

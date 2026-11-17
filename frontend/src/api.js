@@ -5,7 +5,7 @@ export async function login(email, password) {
     method: "POST",
     body: new URLSearchParams({ username: email, password }),
   });
-  if (!res.ok) throw new Error("帳號或密碼錯誤");
+  if (!res.ok) throw new Error("Incorrect email or password.");
   return (await res.json()).access_token;
 }
 
@@ -17,7 +17,7 @@ export async function register(email, password) {
   });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.detail ?? "註冊失敗");
+    throw new Error(body.detail ?? "Registration failed.");
   }
   return (await res.json()).access_token;
 }
@@ -28,7 +28,7 @@ export async function streamChat(token, question, { onCitations, onToken }) {
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify({ question }),
   });
-  if (!res.ok) throw new Error(res.status === 401 ? "登入已過期，請重新登入" : "伺服器錯誤");
+  if (!res.ok) throw new Error(res.status === 401 ? "Your session has expired. Please log in again." : "Server error.");
 
   const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
   let buffer = "";

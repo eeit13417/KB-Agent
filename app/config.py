@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     embedding_model: str = "BAAI/bge-m3"
     embedding_dim: int = 1024
 
-    chunk_size: int = 500
+    chunk_size: int = 2000
     chunk_overlap: int = 80
     top_k: int = 5
 

@@ -3,6 +3,17 @@ import { streamChat } from "./api";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+// Pieces of one long section share a label; list each section once, at its best rank.
+// The server sends citations sorted by distance, so the first one seen is the closest.
+function uniqueSources(citations) {
+  const seen = new Set();
+  return citations.filter((citation) => {
+    const key = `${citation.title} ${citation.article_no}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
 
 export default function Chat({ token, onLogout }) {
   const [messages, setMessages] = useState([]);
@@ -43,17 +54,19 @@ export default function Chat({ token, onLogout }) {
     }
   }
 
+  const sources = uniqueSources(citations);
+
   return (
     <div className="app">
       <header className="topbar">
-        <span className="brand">勞動法規問答</span>
-        <button className="link" onClick={onLogout}>登出</button>
+        <span className="brand">US Labor Law Assistant</span>
+        <button className="link" onClick={onLogout}>Log out</button>
       </header>
 
       <main className="layout">
         <section className="conversation">
           <div className="messages">
-            {messages.length === 0 && <p className="empty">試著問：「特別休假怎麼計算？」</p>}
+            {messages.length === 0 && <p className="empty">Try asking: "Do I get paid for sleeping time during a 24-hour shift?"</p>}
 
             {messages.map((message, index) => (
               <div key={index} className={`bubble ${message.role}`}>
@@ -77,20 +90,20 @@ export default function Chat({ token, onLogout }) {
             <input
               value={input}
               onChange={(event) => setInput(event.target.value)}
-              placeholder="輸入你的問題…"
+              placeholder="Ask a question…"
               disabled={busy}
             />
-            <button type="submit" disabled={busy || !input.trim()}>送出</button>
+            <button type="submit" disabled={busy || !input.trim()}>Send</button>
           </form>
         </section>
 
         <aside className="sources">
-          <h2>參考來源</h2>
-          {citations.length === 0 && <p className="muted">送出問題後，這裡會列出引用的條文。</p>}
+          <h2>Sources</h2>
+          {sources.length === 0 && <p className="muted">Regulations used for the answer will appear here.</p>}
 
-          {citations.map((citation) => (
+          {sources.map((citation) => (
             <a
-              key={`${citation.title}-${citation.article_no}`}
+              key={`${citation.title} ${citation.article_no}`}
               className="source-card"
               href={citation.source_url}
               target="_blank"
@@ -99,7 +112,7 @@ export default function Chat({ token, onLogout }) {
               <span className="source-title">{citation.title}</span>
               <span className="source-article">{citation.article_no}</span>
               {citation.chapter && <span className="source-chapter">{citation.chapter}</span>}
-              <span className="source-score">距離 {citation.distance.toFixed(3)}</span>
+              <span className="source-score">distance {citation.distance.toFixed(3)}</span>
             </a>
           ))}
         </aside>
