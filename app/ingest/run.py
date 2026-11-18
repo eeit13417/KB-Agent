@@ -15,11 +15,13 @@ from sqlalchemy.orm import Session
 from app.db import SessionLocal
 from app.ingest.chunker import ChunkData, SourceDocument
 from app.ingest.ecfr import chunk_part
+from app.ingest.fedreg import parse_document
 from app.ingest.embedder import embed_documents
 from app.ingest.pdf_loader import PDF_DIR, chunk_pdf, load_manifest
 from app.models import Chunk, Document
 
 ECFR_DIR = pathlib.Path("data/raw/ecfr")
+FR_DIR = pathlib.Path("data/raw/fr")
 logger = logging.getLogger(__name__)
 
 
@@ -42,6 +44,26 @@ def load_ecfr() -> list[SourceDocument]:
                 chunks=part.chunks,
             )
         )
+    return documents
+
+
+def load_fedreg() -> list[SourceDocument]:
+    selected_path = FR_DIR / "selected.json"
+    if not selected_path.exists():
+        raise SystemExit(f"{selected_path} not found; run scripts/fetch_fr.py first")
+    entries = json.loads(selected_path.read_text(encoding="utf-8"))
+
+    documents, empty = [], 0
+    for entry in entries:
+        xml = (FR_DIR / "xml" / f"{entry['document_number']}.xml").read_bytes()
+        doc = parse_document(xml, entry)
+        # Corrections whose only content is an amendment instruction have no chunks;
+        # storing them would leave documents that can never be retrieved.
+        if doc.chunks:
+            documents.append(doc)
+        else:
+            empty += 1
+    logger.info("Federal Register: %d documents, %d skipped with no content", len(documents), empty)
     return documents
 
 
@@ -99,7 +121,7 @@ def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     started = time.perf_counter()
 
-    documents = load_ecfr() + load_pdfs()
+    documents = load_ecfr() + load_fedreg() + load_pdfs()
 
     # One encode call for all chunks: the model sorts by length internally, so batching
     # across documents wastes much less padding than one call per document.

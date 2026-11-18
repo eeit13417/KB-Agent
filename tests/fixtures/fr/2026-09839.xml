@@ -1,0 +1,434 @@
+<RULE>
+            <PREAMB>
+                <AGENCY TYPE="N">DEPARTMENT OF LABOR</AGENCY>
+                <SUBAGY>Wage and Hour Division</SUBAGY>
+                <CFR>29 CFR Part 541</CFR>
+                <DEPDOC>[Docket No. WHD-2026-0100]</DEPDOC>
+                <RIN>RIN 1235-AA57</RIN>
+                <SUBJECT>Defining and Delimiting the Exemptions for Executive, Administrative, Professional, Outside Sales, and Computer Employees; Implementation of Federal Court Judgments</SUBJECT>
+                <AGY>
+                    <HD SOURCE="HED">AGENCY:</HD>
+                    <P>Wage and Hour Division, Department of Labor.</P>
+                </AGY>
+                <ACT>
+                    <HD SOURCE="HED">ACTION:</HD>
+                    <P>Final rule; technical amendment.</P>
+                </ACT>
+                <SUM>
+                    <HD SOURCE="HED">SUMMARY:</HD>
+                    <P>This document implements the judgments of federal courts vacating the Department of Labor's (Department) 2024 final rule revising regulations issued under the Fair Labor Standards Act (FLSA or Act) implementing the exemptions from minimum wage and overtime pay requirements for executive, administrative, professional, outside sales, and computer employees. Through this technical amendment, the Department is removing from the Code of Federal Regulations (CFR) the regulatory text from the now-vacated 2024 rule and republishing in its place the regulatory text as it existed prior to the effective date of that rule.</P>
+                </SUM>
+                <EFFDATE>
+                    <HD SOURCE="HED">DATES:</HD>
+                    <P> This rule is effective May 15, 2026.</P>
+                </EFFDATE>
+                <FURINF>
+                    <HD SOURCE="HED">FOR FURTHER INFORMATION CONTACT:</HD>
+                    <P>Daniel Navarrete, Director of Division of Regulations, Legislation, and Interpretation, Wage and Hour Division, U.S. Department of Labor, Room S-3502, 200 Constitution Avenue NW, Washington, DC 20210, telephone: (202) 693-0406 (this is not a toll-free number). Alternative formats are available upon request by calling 1-866-487-9243. If you are deaf, hard of hearing, or have a speech disability, please dial 7-1-1 to access telecommunications relay services.</P>
+                </FURINF>
+            </PREAMB>
+            <SUPLINF>
+                <HD SOURCE="HED">
+                    SUPPLEMENTARY INFORMATION:
+                    <PRTPAGE P="27834"/>
+                </HD>
+                <HD SOURCE="HD1">I. Background</HD>
+                <HD SOURCE="HD2">A. The FLSA and the Part 541 Regulations</HD>
+                <P>
+                    The FLSA generally requires covered employers to pay employees at least the federal minimum wage for all hours worked and overtime at a rate of not less than one and one-half times the employee's regular rate of pay for all hours worked over 40 in a workweek.
+                    <SU>1</SU>
+                    <FTREF/>
+                     The FLSA includes a number of exemptions from its wage and hour requirements, including section 13(a)(1), which exempts “any employee employed in a bona fide executive, administrative, or professional capacity . . . or in the capacity of [an] outside salesman (as such terms are defined and delimited from time to time by regulations of the Secretary [of Labor], subject to the provisions of [the Administrative Procedure Act] . . . ).” 
+                    <SU>2</SU>
+                    <FTREF/>
+                     These FLSA exemptions are commonly known as the “white collar” or “EAP” exemptions.
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>1</SU>
+                         
+                        <E T="03">See</E>
+                         29 U.S.C. 206(a), 207(a).
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>2</SU>
+                         29 U.S.C. 213(a)(1).
+                    </P>
+                </FTNT>
+                <P>
+                    Pursuant to its explicit rulemaking authority, the Department has long maintained regulations that generally require each of the following three tests to be met for an employee to be exempt: (1) the employee's job duties must primarily involve executive, administrative, or professional duties as defined by the regulations (the duties test); (2) the employee must be paid a predetermined and fixed salary that is not subject to reduction because of variations in the quality or quantity of work performed (the salary basis test); and (3) the amount of salary paid must meet a minimum specified amount (the salary level
+                    <FTREF/>
+                     test).
+                    <SU>3</SU>
+                      
+                    <E T="03">See generally</E>
+                     29 CFR part 541. In 2004, the Department created an alternative test for highly compensated employees (the “HCE test”), pairing a reduced job duties requirement with an annual earnings threshold substantially higher than the standard salary level requirement.
+                    <SU>4</SU>
+                    <FTREF/>
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>3</SU>
+                         The salary basis and salary level tests do not apply to doctors, lawyers, teachers, and outside sales employees. 
+                        <E T="03">See</E>
+                         29 CFR 541.303(d), 541.304(d), 541.500(c).
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>4</SU>
+                         
+                        <E T="03">See</E>
+                         69 FR 22122, 22172 (Apr. 23, 2004).
+                    </P>
+                </FTNT>
+                <P>
+                    On September 27, 2019, the Department published a final rule to increase the part 541 earnings thresholds from those set in the Department's 2004 rule.
+                    <SU>5</SU>
+                    <FTREF/>
+                     As relevant here, that rule raised the salary level from $455 per week to $684 per week (equivalent to $35,568 per year for a full-year worker).
+                    <SU>6</SU>
+                    <FTREF/>
+                     The rule also raised the HCE test's total annual compensation requirement from $100,000 per year to $107,432 per year (of which $684 per week must be paid on a salary or fee basis).
+                    <SU>7</SU>
+                    <FTREF/>
+                     The 2019 rule took effect on January 1, 2020; the salary level itself was not challenged.
+                    <SU>8</SU>
+                    <FTREF/>
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>5</SU>
+                         84 FR 51230.
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>6</SU>
+                         
+                        <E T="03">See id.</E>
+                         at 51238.
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>7</SU>
+                         
+                        <E T="03">See id.</E>
+                         at 51250.
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>8</SU>
+                         Although a lawsuit was filed challenging the 2019 rule, that case ultimately concerned the Department's authority to have a salary level test, not the level set in that rule. 
+                        <E T="03">See Mayfield</E>
+                         v. 
+                        <E T="03">U.S. Dep't of Lab.,</E>
+                         117 F.4th 611, 615 (5th Cir. 2024).
+                    </P>
+                </FTNT>
+                <HD SOURCE="HD2">B. 2024 Part 541 Rule</HD>
+                <P>
+                    Four years later, on April 26, 2024, the Department published a final rule to again raise the part 541 earnings thresholds (2024 rule).
+                    <SU>9</SU>
+                    <FTREF/>
+                     The 2024 rule featured two increases to the standard salary level and the HCE total annual compensation threshold, with the salary level slated to increase to $844 per week on July 1, 2024, further rise to $1,128 per week on January 1, 2025, and the HCE total annual compensated level to increase to $132,964 and $151,164 on these respective dates. The rule also provided for automatic triennial updates to the earnings thresholds. The 2024 rule took effect on July 1, 2024 (except as applied to the State of Texas in its capacity as an employer).
+                    <SU>10</SU>
+                    <FTREF/>
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>9</SU>
+                         89 FR 32842.
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>10</SU>
+                         
+                        <E T="03">See id.</E>
+                         In 
+                        <E T="03">Texas</E>
+                         v. 
+                        <E T="03">U.S. Dep 't of Labor,</E>
+                         738 F. Supp. 3d 807 (E.D. Tex. 2024), the court preliminarily enjoined the Department from implementing and enforcing the 2024 rule against the State of Texas in its capacity as an employer.
+                    </P>
+                </FTNT>
+                <HD SOURCE="HD2">C. Judicial Vacatur of the 2024 Rule</HD>
+                <P>
+                    Four lawsuits challenged the 2024 rule: one filed by the State of Texas and one by a group of 13 business plaintiffs in the U.S. District Court for the Eastern District of Texas (these were subsequently consolidated into one case); one commenced by a business plaintiff, Flint Avenue, LLC, in the U.S. District Court for the Northern District of Texas; and one initiated by the Association of Christian Schools International, initially filed in the U.S. District Court for the Middle District of Tennessee and subsequently transferred to the U.S. District Court for the District of Columbia.
+                    <SU>11</SU>
+                    <FTREF/>
+                     On November 15, 2024, the U.S. District Court for the Eastern District of Texas issued an order vacating the 2024 rule in 
+                    <E T="03">Texas</E>
+                     v. 
+                    <E T="03">U.S. Dep't of Labor,</E>
+                     756 F. Supp. 3d 361 (E.D. Tex. 2024). On December 30, 2024, the U.S. District Court for the Northern District of Texas likewise issued an order vacating the 2024 rule in 
+                    <E T="03">Flint Avenue, LLC</E>
+                     v. 
+                    <E T="03">U.S. Dep't of Labor,</E>
+                     No. 5:24-cv-00130-C, Dkt. No. 62. These orders remain final judgments following the dismissal of the appeal in each case by the U.S. Court of Appeals for the Fifth Circuit on May 5 and 7, 2026, respectively.
+                    <SU>12</SU>
+                    <FTREF/>
+                     In light of these judgments, the operative version of the Department's part 541 regulations is the version of these regulations that was in place on June 30, 2024, prior to the effective date of the 2024 rule, and which the Department has been enforcing.
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>11</SU>
+                         
+                        <E T="03">See Ass'n of Christian Schs. Int'l</E>
+                         v. 
+                        <E T="03">U.S. Dep't of Lab.,</E>
+                         No. 24-cv-00984, Dkt. No. 20 (M.D. Tenn. Sept. 11, 2024) (granting joint motion to transfer). The case was ultimately dismissed on May 7, 2026. 
+                        <E T="03">Ass'n of Christian Schs. Int'l</E>
+                         v. 
+                        <E T="03">U.S. Dep't of Lab.,</E>
+                         No. 24-cv-02618, Dkt. No. 51 (D.D.C.) (dismissal filing).
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>12</SU>
+                         
+                        <E T="03">See Texas</E>
+                         v. 
+                        <E T="03">U.S. Dep't of Lab.,</E>
+                         No. 24-40777, Dkt. No. 82 (5th Cir. May 5, 2026) (order dismissing appeal); 
+                        <E T="03">Flint Ave., LLC</E>
+                         v. 
+                        <E T="03">U.S. Dep't of Lab.,</E>
+                         No. 25-10349, Dkt. No. 58 (5th Cir. May 7, 2026) (same).
+                    </P>
+                </FTNT>
+                <P>Accordingly, to implement these judicial decisions, this final rule amends the Department's part 541 regulations to reinstate the regulatory text promulgated in the 2019 final rule, as it appeared in the CFR immediately prior to the effective date of the 2024 rule. Put simply, this action is a technical correction accounting for changes in the law that have already occurred.</P>
+                <HD SOURCE="HD1">II. Procedural and Other Matters</HD>
+                <P>
+                    Section 553(b)(B) of the Administrative Procedure Act (APA) provides that an agency is not required to publish a notice of proposed rulemaking in the 
+                    <E T="04">Federal Register</E>
+                     and solicit public comments when the agency has good cause to find that doing so would be “impracticable, unnecessary, or contrary to the public interest.” 
+                    <SU>13</SU>
+                    <FTREF/>
+                     The Department finds that good cause exists to dispense with public notice-and-comment rulemaking procedures in this final rule, inasmuch as this final rule merely conforms the text in the CFR to reflect the courts' vacatur of the 2024 rule by removing the 2024 rule regulatory text and replacing it with the text from the 2019 rule. Because the Department is merely giving effect to the courts' orders and is not exercising discretion with respect to this action (
+                    <E T="03">i.e.,</E>
+                     it is simply republishing in the CFR the regulatory text that existed prior to the 2024 rule), any notice and comment process would be unnecessary.
+                    <SU>14</SU>
+                    <FTREF/>
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>13</SU>
+                         5 U.S.C. 553(b)(B).
+                    </P>
+                </FTNT>
+                <FTNT>
+                    <P>
+                        <SU>14</SU>
+                         The Department's issuance of this technical amendment to ensure that the CFR is now accurate does not foreclose the Department from engaging in notice and comment rulemaking in the future to update the part 541 regulations.
+                    </P>
+                </FTNT>
+                <P>
+                    Section 553(d) of the APA provides that substantive rules should take effect not less than 30 days after the date they are published in the 
+                    <E T="04">Federal Register</E>
+                     unless “otherwise provided by the agency for good cause found[.]” 
+                    <SU>15</SU>
+                    <FTREF/>
+                     The 
+                    <PRTPAGE P="27835"/>
+                    Department finds that it has good cause to make this rule effective immediately upon publication. As discussed above, this rule merely updates the CFR to reflect the courts' vacatur of the 2024 rule. Accordingly, the Department determines that a delayed effective date is unnecessary, because the court orders vacating the 2024 rule are already operative. Delaying the ministerial act of removing the regulatory text of the vacated rule and restoring the operative regulatory text in the CFR could also lead to confusion among the public about the state of the law as mandated by courts. Delay could, for example, mislead employees and employers who consult the CFR to learn about their rights and responsibilities under the FLSA. To avoid such confusion, it is in the public interest that the Department correct the CFR to reflect the courts' orders as expeditiously as possible following the conclusion of the above-mentioned litigation.
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>15</SU>
+                         5 U.S.C. 553(d)(3).
+                    </P>
+                </FTNT>
+                <P>
+                    The Office of Information and Regulatory Affairs has determined that this technical amendment is not significant for purposes of Executive Orders 12866 and 13563. Additionally, no analysis is required under the Regulatory Flexibility Act because, for the reasons discussed above, the Department is not required to engage in notice and comment under the APA.
+                    <SU>16</SU>
+                    <FTREF/>
+                     This technical amendment does not implicate the Unfunded Mandates Reform Act of 1995, 2 U.S.C. 1531 
+                    <E T="03">et. seq.,</E>
+                     as it does not result in the expenditure of $100,000,000 or more (adjusted annually for inflation) in any one year by State, local, and tribal governments, in the aggregate, or by the private sector. This technical amendment does not have significant federalism implications under Executive Order 13132, and it is not subject to the requirements of the Paperwork Reduction Act (44 U.S.C. 3501 
+                    <E T="03">et seq.</E>
+                    ), because it does not contain a collection of information as defined in 44 U.S.C. 3502(3).
+                </P>
+                <FTNT>
+                    <P>
+                        <SU>16</SU>
+                         
+                        <E T="03">See</E>
+                         5 U.S.C. 601(2) (defining rules requiring a regulatory flexibility analysis); 
+                        <E T="03">id.</E>
+                         at 604(a) (requiring final regulatory flexibility analysis for rules where the agency was “required . . . to publish a general notice of proposed rulemaking”).
+                    </P>
+                </FTNT>
+                <P>
+                    The Congressional Review Act (CRA), 5 U.S.C. 801 
+                    <E T="03">et seq.,</E>
+                     generally provides that before certain actions may take effect, the agency promulgating the action must submit a report, which includes a copy of the action, to each House of the Congress and to the Comptroller General of the United States. This technical amendment is not a “major rule” for CRA purposes, 
+                    <E T="03">see</E>
+                     5 U.S.C. 804(2), but rather is administrative in nature and only implements the district courts' rulings, and thus is not subject to the 60-day delayed effective date generally prescribed for major rules, 
+                    <E T="03">see</E>
+                     5 U.S.C. 801(a)(3). In addition, as discussed above, the Department has determined that good cause exists to issue this technical amendment without notice-and-comment procedures. Pursuant to 5 U.S.C. 808(2), this technical amendment is thus not subject to the CRA's timing requirements.
+                </P>
+                <LSTSUB>
+                    <HD SOURCE="HED">List of Subjects in 29 CFR Part 541</HD>
+                    <P>Labor, Minimum wages, Overtime pay, Salaries, Teachers, Wages.</P>
+                </LSTSUB>
+                <P>For the reasons stated in the preamble, the Wage and Hour Division, Department of Labor, amends 29 CFR part 541 as follows:</P>
+                <PART>
+                    <HD SOURCE="HED">PART 541—DEFINING AND DELIMITING THE EXEMPTIONS FOR EXECUTIVE, ADMINISTRATIVE, PROFESSIONAL, COMPUTER AND OUTSIDE SALES EMPLOYEES</HD>
+                </PART>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>1. The authority citation for part 541 continues to read as follows:</AMDPAR>
+                    <AUTH>
+                        <HD SOURCE="HED">Authority:</HD>
+                        <P> 29 U.S.C. 213; Pub. L. 101-583, 104 Stat. 2871; Reorganization Plan No. 6 of 1950 (3 CFR, 1945-53 Comp., p. 1004); Secretary's Order 01-2014 (Dec. 19, 2014), 79 FR 77527 (Dec. 24, 2014).</P>
+                    </AUTH>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>2. Remove § 541.5:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.5</SECTNO>
+                        <SUBJECT> [Removed]</SUBJECT>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>3. Amend § 541.100 by revising paragraph (a)(1) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.100</SECTNO>
+                        <SUBJECT> General rule for executive employees.</SUBJECT>
+                        <P>(a) * * *</P>
+                        <P>(1) Compensated on a salary basis pursuant to § 541.600 at a rate of not less than $684 per week (or $455 per week if employed in the Commonwealth of the Northern Mariana Islands, Guam, Puerto Rico, or the U.S. Virgin Islands by employers other than the Federal government, or $380 per week if employed in American Samoa by employers other than the Federal government), exclusive of board, lodging or other facilities;</P>
+                        <STARS/>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>4. Amend § 541.200 by revising paragraph (a)(1) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.200</SECTNO>
+                        <SUBJECT> General rule for administrative employees.</SUBJECT>
+                        <P>(a) * * *</P>
+                        <P>(1) Compensated on a salary or fee basis pursuant to § 541.600 at a rate of not less than $684 per week (or $455 per week if employed in the Commonwealth of the Northern Mariana Islands, Guam, Puerto Rico, or the U.S. Virgin Islands by employers other than the Federal government, or $380 per week if employed in American Samoa by employers other than the Federal government), exclusive of board, lodging or other facilities;</P>
+                        <STARS/>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>5. Amend § 541.204 by revising paragraph (a)(1) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.204</SECTNO>
+                        <SUBJECT> Educational establishments.</SUBJECT>
+                        <P>(a) * * *</P>
+                        <P>(1) Compensated on a salary or fee basis at a rate of not less than $684 per week (or $455 per week if employed in the Commonwealth of the Northern Mariana Islands, Guam, Puerto Rico, or the U.S. Virgin Islands by employers other than the Federal government, or $380 per week if employed in American Samoa by employers other than the Federal government), exclusive of board, lodging, or other facilities; or on a salary basis which is at least equal to the entrance salary for teachers in the educational establishment by which employed; and</P>
+                        <STARS/>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>6. Amend § 541.300 by revising paragraph (a)(1) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.300</SECTNO>
+                        <SUBJECT> General rule for professional employees.</SUBJECT>
+                        <P>(a) * * *</P>
+                        <P>(1) Compensated on a salary or fee basis pursuant to § 541.600 at a rate of not less than $684 per week (or $455 per week if employed in the Commonwealth of the Northern Mariana Islands, Guam, Puerto Rico, or the U.S. Virgin Islands by employers other than the Federal government, or $380 per week if employed in American Samoa by employers other than the Federal government), exclusive of board, lodging or other facilities; and</P>
+                        <STARS/>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>7. Amend § 541.400 by revising the first sentence of paragraph (b) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.400</SECTNO>
+                        <SUBJECT> General rule for computer employees.</SUBJECT>
+                        <STARS/>
+                        <P>(b) The section 13(a)(1) exemption applies to any computer employee who is compensated on a salary or fee basis at a rate of not less than $684 per week (or $455 per week if employed in the Commonwealth of the Northern Mariana Islands, Guam, Puerto Rico, or the U.S. Virgin Islands by employers other than the Federal government, or $380 per week if employed in American Samoa by employers other than the Federal government), exclusive of board, lodging, or other facilities. * * *</P>
+                        <STARS/>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>8. Revise § 541.600 to read as follows:</AMDPAR>
+                    <SECTION>
+                        <PRTPAGE P="27836"/>
+                        <SECTNO>§ 541.600</SECTNO>
+                        <SUBJECT> Amount of salary required.</SUBJECT>
+                        <P>(a) To qualify as an exempt executive, administrative or professional employee under section 13(a)(1) of the Act, an employee must be compensated on a salary basis at a rate of not less than $684 per week (or $455 per week if employed in the Commonwealth of the Northern Mariana Islands, Guam, Puerto Rico, or the U.S. Virgin Islands by employers other than the Federal Government, or $380 per week if employed in American Samoa by employers other than the Federal Government), exclusive of board, lodging or other facilities. Administrative and professional employees may also be paid on a fee basis, as defined in § 541.605.</P>
+                        <P>(b) The required amount of compensation per week may be translated into equivalent amounts for periods longer than one week. For example, the $684-per-week requirement will be met if the employee is compensated biweekly on a salary basis of not less than $1,368, semimonthly on a salary basis of not less than $1,482, or monthly on a salary basis of not less than $2,964. However, the shortest period of payment that will meet this compensation requirement is one week.</P>
+                        <P>(c) In the case of academic administrative employees, the compensation requirement also may be met by compensation on a salary basis at a rate at least equal to the entrance salary for teachers in the educational establishment by which the employee is employed, as provided in § 541.204(a)(1).</P>
+                        <P>(d) In the case of computer employees, the compensation requirement also may be met by compensation on an hourly basis at a rate not less than $27.63 an hour, as provided in § 541.400(b).</P>
+                        <P>
+                            (e) In the case of professional employees, the compensation requirements in this section shall not apply to employees engaged as teachers (
+                            <E T="03">see</E>
+                             § 541.303); employees who hold a valid license or certificate permitting the practice of law or medicine or any of their branches and are actually engaged in the practice thereof (
+                            <E T="03">see</E>
+                             § 541.304); or to employees who hold the requisite academic degree for the general practice of medicine and are engaged in an internship or resident program pursuant to the practice of the profession (
+                            <E T="03">see</E>
+                             § 541.304). In the case of medical occupations, the exception from the salary or fee requirement does not apply to pharmacists, nurses, therapists, technologists, sanitarians, dietitians, social workers, psychologists, psychometrists, or other professions which service the medical profession.
+                        </P>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>9. Amend § 541.601 by revising paragraphs (a) and (b)(1) and (b)(2) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.601</SECTNO>
+                        <SUBJECT> Highly compensated employees.</SUBJECT>
+                        <P>(a)(1) Beginning on January 1, 2020, an employee with total annual compensation of at least $107,432 is deemed exempt under section 13(a)(1) of the Act if the employee customarily and regularly performs any one or more of the exempt duties or responsibilities of an executive, administrative or professional employee as identified in subparts B, C or D of this part.</P>
+                        <P>(2) Where the annual period covers periods both prior to and after January 1, 2020, the amount of total annual compensation due will be determined on a proportional basis.</P>
+                        <P>(b)(1) “Total annual compensation” must include at least $684 per week paid on a salary or fee basis as set forth in §§ 541.602 and 541.605, except that § 541.602(a)(3) shall not apply to highly compensated employees. Total annual compensation may also include commissions, nondiscretionary bonuses and other nondiscretionary compensation earned during a 52-week period. Total annual compensation does not include board, lodging and other facilities as defined in § 541.606, and does not include payments for medical insurance, payments for life insurance, contributions to retirement plans and the cost of other fringe benefits.</P>
+                        <P>(2) If an employee's total annual compensation does not total at least the amount specified in the applicable subsection of paragraph (a) by the last pay period of the 52-week period, the employer may, during the last pay period or within one month after the end of the 52-week period, make one final payment sufficient to achieve the required level. For example, for a 52-week period beginning January 1, 2020, an employee may earn $90,000 in base salary, and the employer may anticipate based upon past sales that the employee also will earn $17,432 in commissions. However, due to poor sales in the final quarter of the year, the employee actually only earns $12,000 in commissions. In this situation, the employer may within one month after the end of the year make a payment of at least $5,432 to the employee. Any such final payment made after the end of the 52-week period may count only toward the prior year's total annual compensation and not toward the total annual compensation in the year it was paid. If the employer fails to make such a payment, the employee does not qualify as a highly compensated employee, but may still qualify as exempt under subparts B, C, or D of this part.</P>
+                        <STARS/>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>10. Amend § 541.602 by revising the first sentence of paragraph (a)(3) and the first sentence of paragraph (a)(3)(i) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.602</SECTNO>
+                        <SUBJECT> Salary basis.</SUBJECT>
+                        <P>(a) * * *</P>
+                        <P>(3) Up to ten percent of the salary amount required by § 541.600(a) may be satisfied by the payment of nondiscretionary bonuses, incentives and commissions, that are paid annually or more frequently. * * *</P>
+                        <P>(i) If by the last pay period of the 52-week period the sum of the employee's weekly salary plus nondiscretionary bonus, incentive, and commission payments received is less than 52 times the weekly salary amount required by § 541.600(a), the employer may make one final payment sufficient to achieve the required level no later than the next pay period after the end of the year. * * *</P>
+                        <STARS/>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>11. Amend § 541.604 by revising paragraph (a) and the third sentence in paragraph (b) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.604</SECTNO>
+                        <SUBJECT> Minimum guarantee plus extras.</SUBJECT>
+                        <P>
+                            (a) An employer may provide an exempt employee with additional compensation without losing the exemption or violating the salary basis requirement, if the employment arrangement also includes a guarantee of at least the minimum weekly-required amount paid on a salary basis. Thus, for example, an exempt employee guaranteed at least $684 each week paid on a salary basis may also receive additional compensation of a one percent commission on sales. An exempt employee also may receive a percentage of the sales or profits of the employer if the employment arrangement also includes a guarantee of at least $684 each week paid on a salary basis. Similarly, the exemption is not lost if an exempt employee who is guaranteed at least $684 each week paid on a salary basis also receives additional compensation based on hours worked for work beyond the normal workweek. Such additional compensation may be paid on any basis (
+                            <E T="03">e.g.,</E>
+                             flat sum, bonus payment, straight-time hourly amount, time and one-half or any other basis), and may include paid time off.
+                        </P>
+                        <P>
+                            (b) * * * Thus, for example, an exempt employee guaranteed compensation of at least $725 for any week in which the employee performs any work, and who normally works four 
+                            <PRTPAGE P="27837"/>
+                            or five shifts each week, may be paid $210 per shift without violating the $684-per-week salary basis requirement. * * *
+                        </P>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>12. Amend § 541.605 by revising paragraph (b) to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.605</SECTNO>
+                        <SUBJECT> Fee basis.</SUBJECT>
+                        <STARS/>
+                        <P>(b) To determine whether the fee payment meets the minimum amount of salary required for exemption under these regulations, the amount paid to the employee will be tested by determining the time worked on the job and whether the fee payment is at a rate that would amount to at least the minimum salary per week, as required by §§ 541.600(a) and 541.602(a), if the employee worked 40 hours. Thus, an artist paid $350 for a picture that took 20 hours to complete meets the $684 minimum salary requirement for exemption since earnings at this rate would yield the artist $700 if 40 hours were worked.</P>
+                    </SECTION>
+                </REGTEXT>
+                <REGTEXT TITLE="29" PART="541">
+                    <AMDPAR>13. Remove and reserve § 541.607.</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 541.607</SECTNO>
+                        <SUBJECT> [Reserved]</SUBJECT>
+                    </SECTION>
+                </REGTEXT>
+                <SIG>
+                    <DATED>Dated: May 13, 2026.</DATED>
+                    <NAME>Andrew B. Rogers,</NAME>
+                    <TITLE>Administrator, Wage and Hour Division.</TITLE>
+                </SIG>
+            </SUPLINF>
+            <FRDOC>[FR Doc. 2026-09839 Filed 5-14-26; 8:45 am]</FRDOC>
+            <BILCOD>BILLING CODE 4510-27-P</BILCOD>
+        </RULE>
