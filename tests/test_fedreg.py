@@ -309,3 +309,84 @@ def test_no_thin_space_in_output():
         assert "\u2009" not in c.article_no
         assert "\u2009" not in (c.chapter or "")
         assert "\u2009" not in c.content
+
+
+# ---------------------------------------------------------------------------
+# Column-size truncation
+# ---------------------------------------------------------------------------
+
+
+def _text_of_length(word: str, length: int) -> str:
+    """Numbered words ('Word001 Word002 ...') cut to exactly `length` chars, no edge spaces."""
+    words = " ".join(f"{word}{i:03d}" for i in range(1, length))
+    text = words[:length]
+    if text.endswith(" "):
+        text = text[:-1] + "X"
+    assert len(text) == length and text == text.strip()
+    return text
+
+
+def test_long_chapter_and_article_no_are_truncated_for_every_unit():
+    """AC-25: chapter is cut to 500 and article_no to 50 chars for every unit type."""
+    subject = _text_of_length("Subject", 600)
+    heading = _text_of_length("Heading", 80)
+    sectno = _text_of_length("Sectno", 60)
+    xml = f"""<RULE>
+    <PREAMB>
+        <SUBJECT>{subject}</SUBJECT>
+        <SUM>
+            <HD SOURCE="HED">SUMMARY:</HD>
+            <P>This summary paragraph describes the long-subject rule.</P>
+        </SUM>
+    </PREAMB>
+    <SUPLINF>
+        <HD SOURCE="HD1">{heading}</HD>
+        <P>This preamble paragraph sits under the long heading.</P>
+        <REGTEXT TITLE="29" PART="541">
+            <SECTION>
+                <SECTNO>{sectno}</SECTNO>
+                <SUBJECT>Long section number rule.</SUBJECT>
+                <P>This regulatory paragraph sits under the long section number.</P>
+            </SECTION>
+        </REGTEXT>
+    </SUPLINF>
+</RULE>""".encode("utf-8")
+
+    doc = parse_document(xml, _entry("2026-09839"))
+
+    summary_full_chapter = subject
+    preamble_full_chapter = f"{subject} > {heading}"
+    regulatory_full_chapter = f"{subject} > Regulatory text > 29 CFR Part 541"
+
+    summary = [c for c in doc.chunks if _first_line(c.content) == subject]
+    preamble = [c for c in doc.chunks if _first_line(c.content) == heading]
+    regulatory = [
+        c
+        for c in doc.chunks
+        if _first_line(c.content) == f"{sectno} Long section number rule."
+    ]
+    # There is a summary chunk, a preamble chunk and a regulatory text chunk.
+    assert summary, "no summary chunk"
+    assert preamble, "no preamble chunk"
+    assert regulatory, "no regulatory text chunk"
+
+    expected = [
+        (summary, summary_full_chapter, "Summary"),
+        (preamble, preamble_full_chapter, heading),
+        (regulatory, regulatory_full_chapter, sectno),
+    ]
+    for chunks, full_chapter, full_article_no in expected:
+        for c in chunks:
+            assert len(c.chapter) <= 500
+            assert c.chapter == full_chapter[:500]
+            assert len(c.article_no) <= 50
+            assert c.article_no == full_article_no[:50]
+
+    # Every chunk in the document obeys the column sizes.
+    for c in doc.chunks:
+        assert len(c.chapter or "") <= 500
+        assert len(c.article_no) <= 50
+
+    # The summary chunk's content still starts with the full 600-character subject line.
+    assert doc.chunks[0].content.split("\n")[0] == subject
+    assert len(_first_line(doc.chunks[0].content)) == 600
