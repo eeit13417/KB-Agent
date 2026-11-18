@@ -105,7 +105,8 @@ def table_lines(table: ET.Element) -> list[str]:
 
 def block_lines(el: ET.Element) -> list[str]:
     """The lines of one element: a paragraph is one line, a table one line per row."""
-    if el.tag in DROP or el.tag == "HD":
+    # REGTEXT gives regulatory text units of its own (regtext_units), never preamble lines.
+    if el.tag in DROP or el.tag in {"HD", "REGTEXT"}:
         return []
     if el.tag in LINE_TAGS:
         line = text(el)
@@ -122,9 +123,11 @@ def block_lines(el: ET.Element) -> list[str]:
 
 
 def summary_unit(preamble: ET.Element, subject: str) -> Unit:
+    # Newer documents call the date element EFFDATE, older ones DATES.
+    fields = (("Action", ("ACT",)), ("Summary", ("SUM",)), ("Dates", ("EFFDATE", "DATES")))
     unit = Unit(subject, "Summary", subject)
-    for tag, label in (("ACT", "Action"), ("SUM", "Summary"), ("EFFDATE", "Dates")):
-        el = preamble.find(tag)
+    for label, tags in fields:
+        el = next((found for tag in tags if (found := preamble.find(tag)) is not None), None)
         if el is not None:
             body = " ".join(line for child in el for line in block_lines(child))
             if body:
@@ -151,27 +154,25 @@ def section_units(regtext: ET.Element, subject: str) -> list[Unit]:
     return units
 
 
-def body_units(root: ET.Element, subject: str) -> list[Unit]:
-    """Preamble heading units and regulatory text units, in document order.
+def regtext_units(el: ET.Element, subject: str) -> list[Unit]:
+    """Regulatory text units of every REGTEXT in el, el itself included, in document order."""
+    return [unit for regtext in el.iter("REGTEXT") for unit in section_units(regtext, subject)]
+
+
+def suplinf_units(suplinf: ET.Element, subject: str) -> list[Unit]:
+    """Preamble heading units and regulatory text units of SUPLINF, in document order.
 
     A heading unit is added when its heading is met, and the lines that follow are added
     to it, so a unit keeps the position of its heading even when regulatory text comes
     before its next line.
     """
-    units: list[Unit] = []
-    current = Unit(SUPPLEMENTARY, SUPPLEMENTARY, f"{subject} > {SUPPLEMENTARY}")
-    units.append(current)
+    current: Unit | None = Unit(SUPPLEMENTARY, SUPPLEMENTARY, f"{subject} > {SUPPLEMENTARY}")
+    units: list[Unit] = [current]
     path: list[tuple[int, str]] = []  # enclosing headings as (level, text)
     skipping = False  # inside the preamble table of contents
 
-    elements = []
-    for child in root:
-        elements += list(child) if child.tag == "SUPLINF" else [child]
-
-    for el in elements:
-        if el.tag == "REGTEXT":
-            units += section_units(el, subject)
-            continue
+    for el in suplinf:
+        units += regtext_units(el, subject)
         match = HEADING_SOURCE.fullmatch(el.get("SOURCE", "")) if el.tag == "HD" else None
         if match:
             level, heading = int(match.group(1)), text(el)
@@ -185,10 +186,25 @@ def body_units(root: ET.Element, subject: str) -> list[Unit]:
             chapter = " > ".join([subject, *(hd for _, hd in path)])
             current = Unit(heading, article_no, chapter)
             units.append(current)
-        elif current is not None and el.tag not in {"PREAMB", "SECTION"}:
+        elif current is not None and el.tag != "SECTION":
             current.lines += block_lines(el)
 
-    return [unit for unit in units if unit.lines]
+    return units
+
+
+def body_units(root: ET.Element, subject: str) -> list[Unit]:
+    """Every unit after the summary, in document order.
+
+    Preamble heading units come only from SUPLINF; regulatory text units come from a
+    REGTEXT wherever it sits, including inside PREAMB (correction documents).
+    """
+    units: list[Unit] = []
+    for child in root:
+        if child.tag == "SUPLINF":
+            units += suplinf_units(child, subject)
+        else:
+            units += regtext_units(child, subject)
+    return units
 
 
 # ---------------------------------------------------------------------------
@@ -207,7 +223,8 @@ def parse_document(xml: bytes, entry: dict, max_chars: int = settings.chunk_size
 
     units = [summary_unit(preamble, subject), *body_units(root, subject)]
     chunks: list[ChunkData] = []
-    for unit in units:
+    # A unit with no body lines, the summary included, produces no chunk.
+    for unit in (unit for unit in units if unit.lines):
         # Cut to the database column sizes; the content keeps the full heading and lines.
         chapter = unit.chapter[:CHAPTER_MAX]
         article_no = unit.article_no[:ARTICLE_NO_MAX]
