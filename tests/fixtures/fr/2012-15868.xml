@@ -1,0 +1,23 @@
+<RULE>
+            <PREAMB>
+                <AGENCY TYPE="N">DEPARTMENT OF LABOR</AGENCY>
+                <SUBAGY>Wage and Hour Division</SUBAGY>
+                <CFR>29 CFR Part 570</CFR>
+                <SUBJECT>Child Labor Regulations, Orders and Statements of Interpretation</SUBJECT>
+                <HD SOURCE="HD2">CFR Correction</HD>
+                <REGTEXT TITLE="29" PART="570">
+                    <AMDPAR>In Title 29 of the Code of Federal Regulations, Parts 500 to 899, revised as of July 1, 2011, on page 302, the section heading for § 570.65 is corrected to read as follows:</AMDPAR>
+                    <SECTION>
+                        <SECTNO>§ 570.65 </SECTNO>
+                        <SUBJECT>[CORRECTED]</SUBJECT>
+                        <EXTRACT>
+                            <FP>
+                                <E T="0712">§ 570.65 Occupations involving the operation of circular saws, band saws, guillotine shears, chain saws, reciprocating saws, wood chippers, and abrasive cutting discs (Order 14).</E>
+                            </FP>
+                        </EXTRACT>
+                    </SECTION>
+                </REGTEXT>
+            </PREAMB>
+            <FRDOC>[FR Doc. 2012-15868 Filed 6-26-12; 8:45 am]</FRDOC>
+            <BILCOD>BILLING CODE 1505-01-D</BILCOD>
+        </RULE>

@@ -390,3 +390,77 @@ def test_long_chapter_and_article_no_are_truncated_for_every_unit():
     # The summary chunk's content still starts with the full 600-character subject line.
     assert doc.chunks[0].content.split("\n")[0] == subject
     assert len(_first_line(doc.chunks[0].content)) == 600
+
+
+# ---------------------------------------------------------------------------
+# Older and unusual document layouts
+# ---------------------------------------------------------------------------
+
+
+def test_dates_element_gives_dates_line():
+    """AC-26: 2016-26003 uses DATES; chunk 0 is the summary with the Dates line after Action."""
+    doc = _parse("2016-26003")
+    chunk = doc.chunks[0]
+    assert chunk.article_no == "Summary"
+    lines = _lines(chunk.content)
+    action = "Action: Notice of public meeting."
+    dates = "Dates: Wednesday November 16, 2016."
+    assert action in lines
+    assert dates in lines
+    assert lines.index(action) < lines.index(dates)
+
+
+def test_older_osha_proposed_rule_document_fields():
+    """AC-26: 2016-26003 has the OSHA category and the proposed-rule title."""
+    doc = _parse("2016-26003")
+    assert doc.category == "Federal Register: Safety and health"
+    assert doc.title == "FR Doc. 2016-26003 (Proposed rule, 2016-10-28)"
+
+
+def test_lines_before_first_hd1_form_supplementary_information_unit():
+    """AC-27: SUPLINF paragraphs with no HD1 form a 'Supplementary information' unit."""
+    doc = _parse("2016-26003")
+    matches = [
+        c
+        for c in doc.chunks
+        if c.article_no == "Supplementary information"
+        and _first_line(c.content) == "Supplementary information"
+        and c.chapter
+        == "Informal Discussion on Hazard Communication Rulemaking > Supplementary information"
+    ]
+    assert matches
+    assert any("Advanced Meeting Registration:" in c.content for c in matches)
+
+
+@pytest.mark.parametrize(
+    "excluded",
+    ["Signed at Washington, DC, on October 24, 2016", "ruskin.maureen@dol.gov"],
+)
+def test_older_osha_signature_and_contact_dropped(excluded):
+    """AC-27: 2016-26003's signature and contact text appear in no chunk."""
+    doc = _parse("2016-26003")
+    assert doc.chunks
+    assert all(excluded not in c.content for c in doc.chunks)
+
+
+def test_correction_document_regtext_inside_preamb():
+    """AC-28: 2012-15868 (REGTEXT inside PREAMB, no summary elements) has exactly one chunk."""
+    doc = _parse("2012-15868")
+    assert len(doc.chunks) == 1
+    chunk = doc.chunks[0]
+    assert chunk.chunk_index == 0
+    assert chunk.article_no == "§ 570.65"
+    assert chunk.chapter == (
+        "Child Labor Regulations, Orders and Statements of Interpretation"
+        " > Regulatory text > 29 CFR Part 570"
+    )
+    assert _first_line(chunk.content) == "§ 570.65 [CORRECTED]"
+    assert "Occupations involving the operation of circular saws" in chunk.content
+
+
+def test_correction_document_has_no_subject_only_summary():
+    """AC-28: 2012-15868 has no Summary chunk and no chunk holding only the subject."""
+    doc = _parse("2012-15868")
+    subject = "Child Labor Regulations, Orders and Statements of Interpretation"
+    assert all(c.article_no != "Summary" for c in doc.chunks)
+    assert all(c.content.strip() != subject for c in doc.chunks)

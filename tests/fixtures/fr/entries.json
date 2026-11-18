@@ -224,5 +224,43 @@
       }
     ],
     "agency": "wage-and-hour-division"
+  },
+  "2016-26003": {
+    "document_number": "2016-26003",
+    "title": "Informal Discussion on Hazard Communication Rulemaking",
+    "type": "Proposed Rule",
+    "publication_date": "2016-10-28",
+    "page_length": 1,
+    "pdf_url": "https://www.govinfo.gov/content/pkg/FR-2016-10-28/pdf/2016-26003.pdf",
+    "full_text_xml_url": "https://www.federalregister.gov/documents/full_text/xml/2016/10/28/2016-26003.xml",
+    "html_url": "https://www.federalregister.gov/documents/2016/10/28/2016-26003/informal-discussion-on-hazard-communication-rulemaking",
+    "cfr_references": [
+      {
+        "chapter": 0,
+        "citation_url": null,
+        "part": null,
+        "title": 29
+      }
+    ],
+    "agency": "occupational-safety-and-health-administration"
+  },
+  "2012-15868": {
+    "document_number": "2012-15868",
+    "title": "Child Labor Regulations, Orders and Statements of Interpretation",
+    "type": "Rule",
+    "publication_date": "2012-06-27",
+    "page_length": 1,
+    "pdf_url": "https://www.govinfo.gov/content/pkg/FR-2012-06-27/pdf/2012-15868.pdf",
+    "full_text_xml_url": "https://www.federalregister.gov/documents/full_text/xml/2012/06/27/2012-15868.xml",
+    "html_url": "https://www.federalregister.gov/documents/2012/06/27/2012-15868/child-labor-regulations-orders-and-statements-of-interpretation",
+    "cfr_references": [
+      {
+        "chapter": null,
+        "citation_url": null,
+        "part": 570,
+        "title": 29
+      }
+    ],
+    "agency": "wage-and-hour-division"
   }
 }
