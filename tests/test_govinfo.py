@@ -588,3 +588,74 @@ def test_cfr_1904_subpart_notes_dropped(parse):
     doc = parse("cfr-2010-1904.pdf")
     offending = [c.article_no for c in doc.chunks if "NOTE TO SUBPART" in c.content]
     assert offending == []
+
+
+# --------------------------------------------------------------------------- Amendment (step 8b-3)
+
+
+def test_cfr_2002_1904_document_fields(parse):
+    """AC-33: cfr-2002-1904.pdf (mixed-case part heading) parses with its title and modified_date."""
+    doc = parse("cfr-2002-1904.pdf")
+    assert doc.title == "29 CFR Part 1904 (2002 edition)"
+    assert doc.modified_date == date(2002, 7, 1)
+
+
+def test_cfr_2002_1904_first_article_no(parse):
+    """AC-33: the first chunk of cfr-2002-1904.pdf has article_no '§ 1904.0'."""
+    doc = parse("cfr-2002-1904.pdf")
+    assert doc.chunks
+    assert doc.chunks[0].article_no == f"{SECT} 1904.0"
+
+
+def test_cfr_2002_1904_section_1_chapter(parse):
+    """AC-33: chapter of § 1904.1 is the title-cased mixed-case part name plus Subpart B."""
+    doc = parse("cfr-2002-1904.pdf")
+    chunks = chunks_of(doc, f"{SECT} 1904.1")
+    assert chunks
+    expected = f"Recording and Reporting Occupational Injuries and Illnesses / Subpart B{EM}Scope"
+    assert {c.chapter for c in chunks} == {expected}
+
+
+def test_stat_69_711_title(parse):
+    """AC-34: stat-69-711.pdf (law numbered without its Congress) parses with its title."""
+    doc = parse("stat-69-711.pdf")
+    assert doc.title == "Pub. L. 84-381, Fair Labor Standards Amendments of 1955 (69 Stat. 711)"
+
+
+def test_stat_69_711_pages_are_units(parse):
+    """AC-34: distinct article_no values of stat-69-711.pdf are exactly 69 Stat. 711 and 712."""
+    doc = parse("stat-69-711.pdf")
+    assert distinct_in_order(c.article_no for c in doc.chunks) == ["69 Stat. 711", "69 Stat. 712"]
+
+
+def test_stat_69_711_start(parse):
+    """AC-34: the first chunk, after the heading line, starts with 'Public Law 381'."""
+    doc = parse("stat-69-711.pdf")
+    assert doc.chunks
+    first = doc.chunks[0].content
+    assert "\n" in first
+    heading, rest = first.split("\n", 1)
+    assert heading == "Pub. L. 84-381, 69 Stat. 711"
+    assert rest.startswith("Public Law 381")
+
+
+def test_stat_69_711_end(parse):
+    """AC-34: the last chunk ends with this law's 'Approved August 12, 1955.' line."""
+    doc = parse("stat-69-711.pdf")
+    assert doc.chunks
+    assert norm(doc.chunks[-1].content).endswith("Approved August 12, 1955.")
+
+
+def test_stat_69_711_short_title(parse):
+    """AC-34: the normalized text contains the 1955 short-title clause."""
+    doc = parse("stat-69-711.pdf")
+    phrase = 'be cited as the "Fair Labor Standards Amendments of 1955"'
+    assert phrase in norm(all_contents(doc))
+
+
+def test_stat_69_711_previous_law_dropped(parse):
+    """AC-34: no chunk contains 'Eighty-second Congress' from the previous law above the start."""
+    doc = parse("stat-69-711.pdf")
+    assert doc.chunks
+    offending = [c.article_no for c in doc.chunks if "Eighty-second Congress" in c.content]
+    assert offending == []
