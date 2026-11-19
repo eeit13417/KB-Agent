@@ -247,7 +247,7 @@ def is_part_heading(row: Row, part: str | None = None) -> bool:
     return (
         row.kind == "heading"
         and row.size >= 9.5
-        and re.match(rf"PART {number}\s*{EM_DASH}", row.text) is not None
+        and re.match(rf"PART {number}\s*{EM_DASH}", row.text, re.IGNORECASE) is not None
     )
 
 
@@ -463,20 +463,29 @@ def parse_statute(pdf: bytes, entry: dict, max_chars: int = settings.chunk_size)
     with pymupdf.open(stream=pdf, filetype="pdf") as doc:
         pages = [statute_page_lines(page) for page in doc]
 
+    # Laws of the 84th Congress and earlier were printed without the Congress number,
+    # and with their chapter number on the same line ("Public Law 381 CHAPTER 867").
+    congress, _, number = public_law.partition("-")
+    if int(congress) <= 84:
+        printed = number
+        start_line = re.compile(rf"Public Law {re.escape(number)}( CHAPTER \d+)?")
+    else:
+        printed = public_law
+        start_line = re.compile(rf"Public Law {re.escape(public_law)}")
     start = next(
         ((p, i) for p, lines in enumerate(pages) for i, line in enumerate(lines)
-         if line == f"Public Law {public_law}"),
+         if start_line.fullmatch(line)),
         None,
     )
     if start is None:
-        raise ValueError(f"no line reads 'Public Law {public_law}'")
+        raise ValueError(f"no line reads 'Public Law {printed}'")
     end = next(
         ((p, i) for p, lines in enumerate(pages) for i, line in enumerate(lines)
          if (p, i) > start and line.startswith("Approved ")),
         None,
     )
     if end is None:
-        raise ValueError(f"no 'Approved' line follows 'Public Law {public_law}'")
+        raise ValueError(f"no 'Approved' line follows 'Public Law {printed}'")
 
     # The law ends with its approval date; OCR may put scan specks on the same line.
     approved = pages[end[0]][end[1]]
