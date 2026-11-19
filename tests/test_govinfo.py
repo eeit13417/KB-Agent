@@ -527,3 +527,64 @@ def test_chunk_indexes_and_field_lengths(parse, name):
     for c in doc.chunks:
         assert c.chapter is None or len(c.chapter) <= 500
         assert len(c.article_no) <= 50
+
+
+# --------------------------------------------------------------------------- Amendment
+
+APPENDIX_1904 = "Non-Mandatory Appendix A to Subpart B of Part 1904"
+
+
+def test_cfr_785_hyphen_with_trailing_space_is_kept(parse):
+    """AC-30: a word hyphen followed by a space at the line end survives the join (§ 785.6)."""
+    doc = parse("cfr-2010-785.pdf")
+    text = norm(unit_text(doc, f"{SECT} 785.6"))
+    assert "a limited exception for clothes-changing and wash-up time" in text
+
+
+def test_cfr_785_no_clotheschanging(parse):
+    """AC-30: no chunk of cfr-2010-785.pdf contains 'clotheschanging'."""
+    doc = parse("cfr-2010-785.pdf")
+    offending = [c.article_no for c in doc.chunks if "clotheschanging" in c.content]
+    assert offending == []
+
+
+def test_cfr_1904_no_workrelated(parse):
+    """AC-30: no chunk of cfr-2010-1904.pdf contains 'workrelated'."""
+    doc = parse("cfr-2010-1904.pdf")
+    offending = [c.article_no for c in doc.chunks if "workrelated" in c.content]
+    assert offending == []
+
+
+@pytest.mark.parametrize(
+    "row",
+    ["725 | Shoe Repair and Shoeshine Parlors.", "899 | Services, not elsewhere classified."],
+)
+def test_cfr_1904_spanning_table_rows_stay_in_appendix(parse, row):
+    """AC-31: rows of the table spanning both columns are lines of the appendix text."""
+    doc = parse("cfr-2010-1904.pdf")
+    lines = unit_text(doc, APPENDIX_1904).split("\n")
+    assert row in lines
+
+
+def test_cfr_1904_spanning_table_left_half_before_right_half(parse):
+    """AC-31: '525 | Hardware Stores' comes before '725 | Shoe Repair and Shoeshine Parlors.'."""
+    doc = parse("cfr-2010-1904.pdf")
+    lines = unit_text(doc, APPENDIX_1904).split("\n")
+    first = "525 | Hardware Stores"
+    second = "725 | Shoe Repair and Shoeshine Parlors."
+    assert first in lines
+    assert second in lines
+    assert lines.index(first) < lines.index(second)
+
+
+def test_cfr_1904_section_4_has_no_table_rows(parse):
+    """AC-31: the § 1904.4 text does not contain 'Shoe Repair'."""
+    doc = parse("cfr-2010-1904.pdf")
+    assert "Shoe Repair" not in unit_text(doc, f"{SECT} 1904.4")
+
+
+def test_cfr_1904_subpart_notes_dropped(parse):
+    """AC-32: no chunk of cfr-2010-1904.pdf contains 'NOTE TO SUBPART'."""
+    doc = parse("cfr-2010-1904.pdf")
+    offending = [c.article_no for c in doc.chunks if "NOTE TO SUBPART" in c.content]
+    assert offending == []
