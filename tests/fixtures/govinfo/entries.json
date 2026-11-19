@@ -49,5 +49,20 @@
     "name": "Fair Labor Standards Amendments of 1989",
     "category": "Wage and hour (FLSA)",
     "source_url": "https://www.govinfo.gov/content/pkg/STATUTE-103/pdf/STATUTE-103-Pg938.pdf"
+  },
+  "cfr-2002-1904.pdf": {
+    "part": "1904",
+    "year": 2002,
+    "category": "Safety and health (OSHA)",
+    "source_url": "https://www.govinfo.gov/link/cfr/29/1904?year=2002&link-type=pdf"
+  },
+  "stat-69-711.pdf": {
+    "public_law": "84-381",
+    "volume": 69,
+    "page": 711,
+    "enacted": "1955-08-12",
+    "name": "Fair Labor Standards Amendments of 1955",
+    "category": "Wage and hour (FLSA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/STATUTE-69/pdf/STATUTE-69-Pg711.pdf"
   }
 }

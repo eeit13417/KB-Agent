@@ -22,6 +22,9 @@ class SourceDocument:
     source_url: str
     modified_date: date | None
     chunks: list[ChunkData]
+    # One of the statuses in app/models.py. Parsers leave the default; app/ingest/run.py
+    # sets it per source.
+    status: str = "current"
 
 
 def split_article(content: str, max_chars: int) -> list[str]:
