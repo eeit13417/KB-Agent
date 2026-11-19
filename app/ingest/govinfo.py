@@ -32,6 +32,9 @@ CFR_BODY = pymupdf.Rect(110, 172, 505, 714)
 APPENDIX_HEADING = re.compile(r"(NON-MANDATORY |MANDATORY )?APPENDIX\b")
 SOURCE_NOTE = re.compile(r"\[.*\bFR\b.*\]")
 DOT_LEADER = re.compile(r"\.{3,}")
+# Newer CFR editions put a space after a hyphen that is part of the word ("clothes- ").
+HARD_HYPHEN_RAW = re.compile(r"[A-Za-z]-\s+$")
+HARD_HYPHEN_END = re.compile(r"[A-Za-z]- $")
 
 
 @dataclass
@@ -54,9 +57,15 @@ def clean(text: str) -> str:
 
 
 def join_lines(first: str, second: str) -> str:
-    """Join two printed lines, mending a word broken by a hyphen at the line end."""
+    """Join two printed lines, mending a word broken by a hyphen at the line end.
+
+    A CFR row whose hyphen was followed by a space in the text layer keeps that one
+    trailing space (see `page_rows`): the hyphen belongs to the word and stays.
+    """
     if not first or not second:
         return first or second
+    if HARD_HYPHEN_END.search(first):
+        return first[:-1] + second  # clothes- + changing -> clothes-changing
     if len(first) >= 2 and first[-1] == "-" and first[-2].isalpha():
         before, after = first[-2], second[0]
         if after.isalpha() and before.isupper() == after.isupper():
@@ -71,7 +80,7 @@ def join_all(lines: list[str]) -> str:
     text = ""
     for line in lines:
         text = join_lines(text, line)
-    return text
+    return text.rstrip()
 
 
 # ---------------------------------------------------------------------------
@@ -138,25 +147,68 @@ def is_small_caps(spans: list[dict]) -> bool:
     return ":" not in text and lowercase <= 0.15 * len(letters)
 
 
+def spanning_table(page: pymupdf.Page, middle: float) -> tuple[float, float] | None:
+    """The y-range of a table spanning both columns, from the rules drawn across it.
+
+    GPO rules such a table with horizontal lines that cross the column gap; tables inside
+    one column have rules no wider than the column.
+    """
+    ys = [
+        d["rect"].y0
+        for d in page.get_drawings()
+        if d["rect"].height < 2
+        and d["rect"].x0 < middle - 20 < middle + 20 < d["rect"].x1
+        and CFR_BODY.y0 <= d["rect"].y0 <= CFR_BODY.y1
+    ]
+    return (min(ys), max(ys)) if ys else None
+
+
 def page_rows(page: pymupdf.Page) -> list[Row]:
-    """The rows of one page: the left column top to bottom, then the right column."""
+    """The rows of one page, read column by column.
+
+    The left column top to bottom, then the right column. A table spanning both columns
+    splits the page into three bands, each read column by column: the text above it, the
+    table, the text below it.
+    """
     middle = page.rect.width / 2
-    columns: dict[int, list[dict]] = {0: [], 1: []}
+    lines: list[dict] = []
     for block in page.get_text("dict")["blocks"]:
         for line in block.get("lines", []):
             # Spaces often come as spans of their own: keep them for the text, but judge
             # fonts and sizes by the visible spans only.
             visible = [s for s in line["spans"] if s["text"].strip()]
             if visible and pymupdf.Rect(line["bbox"]) in CFR_BODY:
-                columns[0 if line["bbox"][0] < middle else 1].append(
-                    {"bbox": line["bbox"], "spans": line["spans"], "visible": visible}
-                )
+                lines.append({"bbox": line["bbox"], "spans": line["spans"], "visible": visible})
+    if not lines:
+        return []
+
+    def column(line: dict) -> int:
+        return 0 if line["bbox"][0] < middle else 1
+
+    # Indents are measured from each column's left edge on the whole page.
+    lefts = {
+        c: min((ln["bbox"][0] for ln in lines if column(ln) == c), default=0.0) for c in (0, 1)
+    }
+    table = spanning_table(page, middle)
+
+    def band(line: dict) -> int:
+        if table is None:
+            return 0
+        y = line["bbox"][1]
+        return 0 if y < table[0] else 1 if y <= table[1] else 2
 
     rows: list[Row] = []
-    for lines in columns.values():
-        if not lines:
-            continue
-        left = min(line["bbox"][0] for line in lines)
+    for b in range(3):
+        for c in (0, 1):
+            part = [ln for ln in lines if band(ln) == b and column(ln) == c]
+            rows.extend(column_rows(part, lefts[c]))
+    return rows
+
+
+def column_rows(lines: list[dict], left: float) -> list[Row]:
+    """The rows of one column (or of one band of it), top to bottom."""
+    rows: list[Row] = []
+    if lines:
         lines.sort(key=lambda line: (line["bbox"][1], line["bbox"][0]))
         groups: list[list[dict]] = []
         for line in lines:
@@ -175,6 +227,9 @@ def page_rows(page: pymupdf.Page) -> list[Row]:
                 text = " | ".join(cells)
             else:
                 text = clean(" ".join(cells))
+                raw = "".join(s["text"] for s in group[-1]["spans"])
+                if text and HARD_HYPHEN_RAW.search(raw):
+                    text += " "  # marks a hyphen that belongs to the word, for join_lines
             if text:
                 x0 = group[0]["bbox"][0]
                 size = max(round(s["size"], 1) for s in spans)
