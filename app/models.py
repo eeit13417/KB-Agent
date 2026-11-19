@@ -10,6 +10,16 @@ from app.config import settings
 class Base(DeclarativeBase):
     pass
 
+
+# What a document is, relative to the law in force today (Document.status).
+CURRENT = "current"  # the current text of a regulation (eCFR)
+RULEMAKING = "rulemaking"  # final and proposed rules (Federal Register)
+SUPERSEDED = "superseded"  # a past annual edition of a regulation (CFR from govinfo)
+ENACTED = "enacted"  # a law as enacted, often amending instructions (Statutes at Large)
+# Searched by default. Superseded editions and enacting laws answer questions about the
+# past, and would otherwise crowd out the current text with old numbers.
+LIVE_STATUSES = (CURRENT, RULEMAKING)
+
 class User(Base):
     __tablename__ = "users"
 
@@ -27,6 +37,7 @@ class Document(Base):
     category: Mapped[str] = mapped_column(String(200))
     source_url: Mapped[str] = mapped_column(String(500))
     modified_date: Mapped[date | None] = mapped_column(Date)
+    status: Mapped[str] = mapped_column(String(20), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     chunks: Mapped[list["Chunk"]] = relationship(
