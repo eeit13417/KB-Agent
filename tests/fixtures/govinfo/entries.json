@@ -1,0 +1,53 @@
+{
+  "cfr-2010-785.pdf": {
+    "part": "785",
+    "year": 2010,
+    "category": "Wage and hour (FLSA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/CFR-2010-title29-vol3/pdf/CFR-2010-title29-vol3-part785.pdf"
+  },
+  "cfr-2020-541.pdf": {
+    "part": "541",
+    "year": 2020,
+    "category": "Wage and hour (FLSA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/CFR-2020-title29-vol3/pdf/CFR-2020-title29-vol3-part541.pdf"
+  },
+  "cfr-1997-541.pdf": {
+    "part": "541",
+    "year": 1997,
+    "category": "Wage and hour (FLSA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/CFR-1997-title29-vol3/pdf/CFR-1997-title29-vol3-part541.pdf"
+  },
+  "cfr-2010-1904.pdf": {
+    "part": "1904",
+    "year": 2010,
+    "category": "Safety and health (OSHA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/CFR-2010-title29-vol5/pdf/CFR-2010-title29-vol5-part1904.pdf"
+  },
+  "stat-88-55.pdf": {
+    "public_law": "93-259",
+    "volume": 88,
+    "page": 55,
+    "enacted": "1974-04-08",
+    "name": "Fair Labor Standards Amendments of 1974",
+    "category": "Wage and hour (FLSA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/STATUTE-88/pdf/STATUTE-88-Pg55.pdf"
+  },
+  "stat-91-1245.pdf": {
+    "public_law": "95-151",
+    "volume": 91,
+    "page": 1245,
+    "enacted": "1977-11-01",
+    "name": "Fair Labor Standards Amendments of 1977",
+    "category": "Wage and hour (FLSA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/STATUTE-91/pdf/STATUTE-91-Pg1245.pdf"
+  },
+  "stat-103-938.pdf": {
+    "public_law": "101-157",
+    "volume": 103,
+    "page": 938,
+    "enacted": "1989-11-17",
+    "name": "Fair Labor Standards Amendments of 1989",
+    "category": "Wage and hour (FLSA)",
+    "source_url": "https://www.govinfo.gov/content/pkg/STATUTE-103/pdf/STATUTE-103-Pg938.pdf"
+  }
+}
