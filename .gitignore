@@ -10,3 +10,6 @@ data/pdf/*
 !data/pdf/manifest.json
 !data/pdf/inspection.json
 !data/pdf/ocr/
+
+# evaluation: cached LLM answers and verdicts
+eval/.cache/
