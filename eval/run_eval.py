@@ -71,8 +71,8 @@ assistant's rules):
 Reply with JSON only: {"verdict": "correct" | "partial" | "incorrect", "reason": "one sentence"}"""
 
 
-class DailyLimit(Exception):
-    """Groq's tokens-per-day limit for a model is used up."""
+class StopRun(Exception):
+    """The run cannot go on today (daily token limit, or the API keeps refusing)."""
 
 
 def cached_call(kind: str, payload: dict, call) -> dict:
@@ -86,10 +86,12 @@ def cached_call(kind: str, payload: dict, call) -> dict:
             break
         except RateLimitError as exc:
             if "per day" in str(exc) or "TPD" in str(exc):
-                raise DailyLimit(str(exc)) from exc
-            time.sleep(30 * (attempt + 1))  # per-minute limit: wait it out
+                raise StopRun(f"{kind}: daily token limit: {exc}") from exc
+            wait = 30 * (attempt + 1)  # per-minute limit or a busy model: wait it out
+            print(f"    {kind}: rate limited, retrying in {wait}s: {str(exc)[:200]}")
+            time.sleep(wait)
     else:
-        raise RuntimeError(f"{kind}: still rate limited after retries")
+        raise StopRun(f"{kind}: still rate limited after retries")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
     time.sleep(PAUSE)  # only after a real call; cache hits need no pause
@@ -167,7 +169,7 @@ def main() -> None:
             try:
                 reply = answer(row["question"], chunks)
                 verdict = judge(row, reply["text"])
-            except DailyLimit as exc:
+            except StopRun as exc:
                 stopped = str(exc)
                 break
             cost = query_cost(reply["prompt_tokens"], reply["completion_tokens"], INPUT_PER_MILLION, OUTPUT_PER_MILLION)
@@ -185,8 +187,9 @@ def main() -> None:
             print(f"  [{i:>3}/{len(rows)}] {row['id']} {row['type']:<12} recall={results[-1]['recall_hit']!s:<5} {verdict['verdict']}")
 
     if stopped:
-        print(f"\nStopped at {len(results)} of {len(rows)}: Groq's daily token limit.\n{stopped}\n"
-              "Answers and verdicts so far are cached; run the same command tomorrow to continue.")
+        print(f"\nStopped at {len(results)} of {len(rows)}.\n{stopped}\n"
+              "Answers and verdicts so far are cached; run the same command again to continue "
+              "(tomorrow, if the daily limit was reached).")
         sys.exit(1)
     report(args, results)
 
