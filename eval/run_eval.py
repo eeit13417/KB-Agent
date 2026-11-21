@@ -38,6 +38,7 @@ RESULTS = EVAL / "results"
 ROUNDS = RESULTS / "rounds.md"
 
 JUDGE_MODEL = "qwen/qwen3.8-27b"  # another model family than the answering model
+JUDGE_MAX_TOKENS = 300
 # Groq Developer tier prices for openai/gpt-oss-120b, USD per million tokens (checked
 # 2026-11-16). The free tier costs nothing; this is what the same traffic would cost paid.
 INPUT_PER_MILLION, OUTPUT_PER_MILLION = 0.15, 0.60
@@ -87,6 +88,8 @@ def cached_call(kind: str, payload: dict, call) -> dict:
         except RateLimitError as exc:
             if "per day" in str(exc) or "TPD" in str(exc):
                 raise StopRun(f"{kind}: daily token limit: {exc}") from exc
+            if "Request too large" in str(exc):  # waiting does not help; the request must change
+                raise StopRun(f"{kind}: request too large: {exc}") from exc
             wait = 30 * (attempt + 1)  # per-minute limit or a busy model: wait it out
             print(f"    {kind}: rate limited, retrying in {wait}s: {str(exc)[:200]}")
             time.sleep(wait)
@@ -133,7 +136,11 @@ def judge(row: dict, answer_text: str) -> dict:
     }
 
     def call() -> dict:
-        response = get_client().chat.completions.create(**payload)
+        # The judge model's free tier allows 1,000 output tokens a minute and Groq rejects any
+        # request whose max_completion_tokens (default 16,384) could exceed it. A verdict is
+        # about 40 tokens. The cap stays out of `payload`, so it does not change the cache key
+        # of verdicts made before it was added.
+        response = get_client().chat.completions.create(**payload, max_completion_tokens=JUDGE_MAX_TOKENS)
         try:
             reply = json.loads(response.choices[0].message.content)
         except (json.JSONDecodeError, TypeError):
