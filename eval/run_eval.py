@@ -55,6 +55,11 @@ Expected behavior "answer":
 - partial: nothing wrong, but a key fact or condition of the reference is missing or vague.
 - incorrect: a key fact is wrong or contradicts the reference, or the assistant says it
   could not find the answer.
+- Key facts are the facts needed to answer the question as asked. Detail in the reference
+  that the question did not ask for (a weekly limit when the question asks about a day) is
+  not required.
+- A contradiction is a statement that cannot be true together with the reference. Leaving
+  out a condition or exception the reference mentions is "partial", not "incorrect".
 
 Expected behavior "decline" (the knowledge base has no answer):
 - correct: says it could not find the answer in its knowledge base, and gives no specific
