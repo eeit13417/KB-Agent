@@ -1,0 +1,40 @@
+﻿id,type,expected_behavior,question,previous_question,expected_answer,answer,human_verdict,human_note
+h005,cross,answer,"The 1977 FLSA amendments changed the monthly tip amount that makes someone a tipped employee. What was the change, and what is the threshold in the current regulations?",,"Effective January 1, 1978, the amount went from $20 to $30 a month; the current regulations still define a tipped employee as one who customarily and regularly receives more than $30 a month in tips.","**Conclusion:**  
+The 1977 amendment to the Fair Labor Standards Act raised the monthly tip amount that defines a “tipped employee” from **$20 per month to $30 per month**. Current regulations reflect this $30‑per‑month threshold.  
+
+**Supporting excerpts:**  
+
+- The amendment “raised the threshold in section 3(t) to $30 a month in tips” (up from $20) [FR Doc. 2011-6749 (Final rule, 2011-04-05) V. Executive Orders 12866 and 13563; Small Busines]  
+
+- The final rule “changed the references … from $20 to $30” and adopts those updates [FR Doc. 2011-6749 (Final rule, 2011-04-05) II. Summary of Comments]  ",correct,
+h035,colloquial,answer,is overtime double time or time and a half,,Time and a half: overtime must be paid at not less than one and one-half times the regular rate for hours over 40 in a workweek.,"**Conclusion:**  
+Overtime under the Fair Labor Standards Act must be paid at **no less than 1½ times** an employee’s regular rate, but it can be paid at a higher rate (e.g., double time) if the employer chooses. It is not automatically double time.
+
+**Supporting rules**
+
+- The Act requires overtime compensation “at a rate not less than one and one‑half times the regular rate” and defines the overtime rate as a “rate per hour” that must meet that minimum (29 CFR Part 778 § 778.308(a)).  
+- The overtime rate “may not be less than one and one‑half times the bonafide rate… It may be a standard multiple greater than one and one‑half (for example, double time)” (29 CFR Part 778 § 778.308(b)).  
+- When an employee works two different jobs, the overtime rate must be “not less than one and one‑half times the hourly non‑overtime rate… It may be… a higher arbitrary figure such as $8 per hour” (29 CFR Part 778 § 778.419(a)).  
+
+These excerpts show that the statutory floor for overtime is time‑and‑a‑half, while double time is permissible but not required.",correct,
+h038,coreference,answer,What if I'm allowed to wait at home?,Is on-call time counted as hours worked?,"If you only have to leave word where you can be reached and can use the time for your own purposes, on-call time at home is not working time.","**Conclusion:**  
+If you are required to stay at home and be available for work (i.e., you cannot freely leave or use the time for personal purposes), that waiting time is considered “engaged to wait” and must be paid. If, however, you have an agreement that lets you treat the time as a bona‑fide off‑duty period—meaning you are free to leave the premises or remain at home for personal activities without being on duty—then the time is not compensable.
+
+**Supporting rules**
+
+1. **Compensable waiting time** – The FLSA requires payment for “all time during which an employee is necessarily required to be on the employer’s premises, on duty or at a prescribed work place.” When an employee must remain on the premises (including a home that is the employer’s prescribed work place) and can be summoned at any moment, the employee is “engaged to wait” and must be paid for that time. [FR Doc. 2013‑22799 (Final rule, 2013‑10‑01) III. Summary of Comments on Changes to the FLSA Do – Rest and Waiting Periods]
+
+2. **Off‑duty exception** – An employer and a live‑in domestic service employee may agree to exclude periods of “complete freedom from all duties” when the employee may either leave the premises or stay on the premises for purely personal pursuits. Those periods, if of sufficient duration, are considered bona‑fide off‑duty time and are **not** compensable. [FR Doc. 2013‑22799 (Final rule, 2013‑10‑01) III. Summary of Comments on Changes to the FLSA Do – Off‑Duty Time]",correct,
+c055,current,answer,What is the minimum age required to work in occupations that the Secretary has declared hazardous for 16- and 17‑year‑olds?,,The minimum age is 18 years.,"The minimum age to work in any occupation that the Secretary has declared hazardous for 16‑ and 17‑year‑olds is **18 years old**.  
+
+- The regulations state that “the FLSA provides for a minimum age of 18 years in occupations found and declared by the Secretary to be particularly hazardous or detrimental to the health or well‑being for minors 16 and 17 years of age”【29 CFR Part 570 § 570.120】.  
+
+Thus, 18 years is the required minimum age for those hazardous occupations.",correct,
+c075,rulemaking,answer,When did OSHA's 2026 final rule on the Puerto Rico State Plan take effect?,,"April 24, 2026.","The rule became effective on **April 24, 2026**【FR Doc. 2026-08108 (Final rule, 2026-04-24) Summary】.",correct,
+h019,no_answer,decline,Can my employer fire me for discussing my pay with coworkers?,,"Not in the knowledge base: the assistant should say it couldn't find this, not answer from general knowledge.",I couldn't find this in the knowledge base.,correct,
+c149,history,answer,"Under the 1966 Fair Labor Standards Amendments, what is the minimum hourly wage for agricultural employees during the second year after the effective date?",,"Not less than $1.15 an hour in the second year, and $1.30 an hour after that.","The 1966 amendments set the minimum wage to rise to **$1.60 per hour on February 1, 1968**, which is the second year after the amendments took effect on February 1, 1967. [29 CFR Part 779 § 779.3]",incorrect,
+c052,current,answer,"May hours where no work is performed, such as vacation, holiday, or illness, be counted as hours worked when calculating overtime premium pay?",,"Yes, it is permissible (but not required) to count those hours as hours worked for overtime premium calculations.","**Conclusion:**  
+No. Hours on which an employee does not work—such as vacation, holiday, or sick‑leave time—are not counted as hours worked for the purpose of calculating overtime premium pay. Those periods are excluded from the regular‑rate calculation and cannot be credited toward overtime compensation.
+
+**Supporting rule:**  
+§ 778.219 (a) explains that payments made for periods when no work is performed because of a holiday, vacation, or illness are “not required to be included in the regular rate because they are not regarded as compensation for working.” Consequently, such non‑working hours are not treated as hours worked and “pay for unused leave may not be credited toward overtime compensation due under the Act.”【29 CFR Part 778 § 778.219】",incorrect,
