@@ -21,7 +21,7 @@ class Settings(BaseSettings):
 
     chunk_size: int = 2000
     chunk_overlap: int = 80
-    top_k: int = 5
+    top_k: int = 10  # chunks given to the model; round r3 measured 5 against 10
 
 
 settings = Settings()
