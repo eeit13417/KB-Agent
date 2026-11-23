@@ -8,6 +8,7 @@ from collections.abc import Sequence
 from typing import Protocol, TypeVar
 
 from app.models import RULEMAKING
+from app.rag.versions import needs_history
 
 RULEMAKING_PENALTY: float = 0.1
 CANDIDATE_POOL: int = 50
@@ -67,7 +68,9 @@ def adjusted_distance(distance: float, status: str, prefer_regulations: bool) ->
 
 def rank(chunks: Sequence[T], question: str, top_k: int) -> list[T]:
     """The top_k chunks by adjusted distance (stable), as the same unchanged objects."""
-    prefer_regulations = not about_rulemaking(question)
+    # Rulemaking text is the evidence of how a rule changed, so questions about past
+    # versions keep it in place too (amendment 1).
+    prefer_regulations = not about_rulemaking(question) and not needs_history(question)
     ordered = sorted(
         chunks,
         key=lambda c: adjusted_distance(c.distance, c.status, prefer_regulations),
