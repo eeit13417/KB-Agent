@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.config import settings
 from app.ingest.embedder import embed_query
 from app.models import LIVE_STATUSES, Chunk, Document
+from app.rag.ranking import CANDIDATE_POOL, rank
 from app.rag.versions import search_scope, title_matches_year
 
 
@@ -37,6 +38,8 @@ def search(
     Documents in force or in rulemaking are always searched. Past CFR editions and
     enacting laws are added when the query's wording asks about the past (or when
     include_history is True); if it names years, only those years' editions and laws.
+    Within that scope the CANDIDATE_POOL closest chunks are re-ranked so that, unless the
+    query is about rulemaking, regulation sections win over nearly-as-close rulemaking text.
     """
     scope = search_scope(query, include_history)
     vector = embed_query(query)
@@ -62,8 +65,9 @@ def search(
             Document.status.in_(LIVE_STATUSES)
             | Document.id.in_(_past_documents_of(session, scope.years))
         )
-    rows = session.execute(statement.order_by(distance).limit(top_k or settings.top_k))
-    return [RetrievedChunk(*row) for row in rows]
+    rows = session.execute(statement.order_by(distance).limit(CANDIDATE_POOL))
+    candidates = [RetrievedChunk(*row) for row in rows]
+    return rank(candidates, query, top_k or settings.top_k)
 
 
 def _past_documents_of(session: Session, years: tuple[int, ...]) -> list[int]:
