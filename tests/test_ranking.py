@@ -219,3 +219,23 @@ def test_rank_returns_all_input_objects_unchanged():
 def test_rank_empty_input():
     """AC-14: an empty input gives an empty list."""
     assert rank([], "anything", 5) == []
+
+
+# --- Amendment 1: no penalty for questions about past versions --------------
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "Under the 2004 regulations, what was the salary test?",
+        "How was overtime originally calculated for tipped employees?",
+    ],
+)
+def test_rank_no_penalty_for_past_version_question(question):
+    """AC-15: a question about past versions (not about rulemaking) gets no penalty."""
+    assert names(rank(six_chunks(), question, 3)) == ["A", "B", "C"]
+
+
+def test_rank_still_penalises_question_about_neither():
+    """AC-15: AC-10's question, about neither rulemaking nor past versions, still gives [B, D, A]."""
+    assert names(rank(six_chunks(), NOT_ABOUT_RULEMAKING, 3)) == ["B", "D", "A"]
