@@ -188,6 +188,8 @@ def main() -> None:
             results.append({
                 "id": row["id"], "type": row["type"], "expected_behavior": row["expected_behavior"],
                 "recall_hit": source_hit(expected, retrieved) if expected else None,
+                # Hit anywhere in what the model was given (top_k chunks), next to recall@5.
+                "context_hit": source_hit(expected, retrieved, k=len(retrieved)) if expected else None,
                 "document_hit": document_hit(expected, retrieved) if expected else None,
                 "verdict": verdict["verdict"], "reason": verdict["reason"],
                 "latency_s": retrieval_s + reply["seconds"],
@@ -236,6 +238,9 @@ def report(args, results: list[dict]) -> None:
 
     print(f"\n{label}: {summary['n']} questions -> {out}")
     print(line.strip())
+    with_context = [r["context_hit"] for r in results if r["context_hit"] is not None]
+    print(f"context recall (expected source anywhere in the {settings.top_k} chunks given): "
+          f"{sum(with_context)}/{len(with_context)}")
     print("\nby type        n  accuracy")
     for kind, stats in sorted(summary["by_type"].items()):
         print(f"  {kind:<12} {stats['n']:>3}  {pct(stats['accuracy'])}")
