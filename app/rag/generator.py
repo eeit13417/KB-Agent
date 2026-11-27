@@ -21,6 +21,11 @@ Rules:
 NO_ANSWER = "I couldn't find this in the knowledge base."
 
 
+def source_kind(status: str, title: str) -> str:
+    """Spec: docs/specs/prompt-sources.md"""
+    raise NotImplementedError
+
+
 
 def build_messages(question: str, chunks: list[RetrievedChunk]) -> list[dict[str, str]]:
     context = "\n\n".join(f"[{c.citation}]\n{c.content}" for c in chunks)
