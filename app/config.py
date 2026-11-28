@@ -23,5 +23,12 @@ class Settings(BaseSettings):
     chunk_overlap: int = 80
     top_k: int = 10  # chunks given to the model; round r3 measured 5 against 10
 
+    # Trace of /chat requests (docs/specs/chat-trace.md)
+    trace_file: str = ""  # also append traces to this JSONL file when set (local use)
+    trace_questions: bool = False  # keep question text in traces (off in production)
+    # Groq Developer tier prices for the answer model, USD per million tokens
+    input_per_million: float = 0.15
+    output_per_million: float = 0.60
+
 
 settings = Settings()
