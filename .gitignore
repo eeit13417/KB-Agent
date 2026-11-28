@@ -13,3 +13,6 @@ data/pdf/*
 
 # evaluation: cached LLM answers and verdicts
 eval/.cache/
+
+# local /chat traces (docs/specs/chat-trace.md)
+logs/

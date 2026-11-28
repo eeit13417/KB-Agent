@@ -66,6 +66,12 @@ def stream_answer(
         temperature=0.2,
     )
     for chunk in stream:
-        text = chunk.choices[0].delta.content
+        # Groq sends token usage on the last chunk only.
+        usage = getattr(chunk, "usage", None)
+        if stats is not None and usage is not None:
+            stats.prompt_tokens = usage.prompt_tokens
+            stats.completion_tokens = usage.completion_tokens
+            stats.queue_seconds = usage.queue_time
+        text = chunk.choices[0].delta.content if chunk.choices else None
         if text:
             yield text
