@@ -1,6 +1,7 @@
 """Turn retrieved chunks into a streamed, cited answer."""
 
 from collections.abc import Iterator
+from dataclasses import dataclass
 from functools import lru_cache
 
 from groq import Groq
@@ -38,7 +39,18 @@ def get_client() -> Groq:
     return Groq(api_key=settings.groq_api_key)
 
 
-def stream_answer(question: str, chunks: list[RetrievedChunk]) -> Iterator[str]:
+@dataclass
+class AnswerStats:
+    """Token usage of one answer, filled in by stream_answer (docs/specs/chat-trace.md)."""
+
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None
+    queue_seconds: float | None = None
+
+
+def stream_answer(
+    question: str, chunks: list[RetrievedChunk], stats: AnswerStats | None = None
+) -> Iterator[str]:
     if settings.llm_provider != "groq":
         raise ValueError(f"unsupported LLM_PROVIDER: {settings.llm_provider}")
 

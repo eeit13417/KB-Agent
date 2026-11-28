@@ -9,6 +9,7 @@ from app.api.deps import get_db, get_current_user
 from app.rag.generator import stream_answer
 from app.rag.retriever import search
 from app.schemas import Citation, ChatRequest
+from app.trace import write_trace  # noqa: F401  (used once the trace is implemented)
 
 router = APIRouter()
 
